@@ -4,24 +4,26 @@ Welcome! This project was created with the main purpose of managing customers, b
 
 ## Project Overview
 
-This blog site allows users to:
+This system allows users to:
 
-- View blog posts
-- Navigate through different pages using Express.js routes
-- Delete blog posts
+- View clients and address
+- Insert/Delete clients with any address
+- Delete address and clients
 
 ## Technologies Used
 
-- **Node.js**: A JavaScript runtime built on Chrome's V8 JavaScript engine.
-- **Express.js**: A minimal and flexible Node.js web application framework.
-- **EJS**: A simple templating language that lets you generate HTML markup with plain JavaScript.
-- **MongoDB**: A NoSQL database used for storing application data.
+- **Asp.Net MVC**: A framework for creating structured and scalable web applications..
+- **WebApi REST**: Allows you to create lightweight and scalable HTTP services for applications..
+- **SqlServer**: Robust relational database management system.
+- **Entity Framework**: Speeds up development by reducing repetitive code and complexity.
+- **Dapper**: Delivers superior performance and simplicity in straightforward and efficient SQL queries.
+- **.NET 8**: Unified platform for developing modern web, desktop and cloud applications.
 
 ## Features
 
-- **Express.js Routes**: Easy navigation and handling of different routes.
-- **EJS View Engine**: Dynamic content rendering using EJS templates.
-- **MongoDB Integration**: Robust data storage and retrieval with MongoDB.
+- **Clients View**: Easy navigation and handling of different routes.
+- **Clients Manage**: Dynamic content rendering using EJS templates.
+- **Address Manage**: Robust data storage and retrieval with MongoDB.
 
 ## 📁 Estrutura do projeto
 - #### Apresentation  
@@ -50,7 +52,7 @@ This blog site allows users to:
 - #### Infrastructure
     ⭐ Repositories: Implementações dos repositórios definidos na camada de Domínio.
 
-    
+
 ## Preview
 
 <div style="text-align: center;">
