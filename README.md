@@ -6,9 +6,8 @@ Welcome! This project was created with the main purpose of managing customers, b
 
 This system allows users to:
 
-- View clients and address
-- Insert/Delete clients with any address
-- Delete address and clients
+- **Clients Manage**: CRUD of Clients.
+- **Address Manage**: CRUD Client's address.
 
 ## Technologies Used
 
@@ -18,12 +17,6 @@ This system allows users to:
 - **Entity Framework**: Speeds up development by reducing repetitive code and complexity.
 - **Dapper**: Delivers superior performance and simplicity in straightforward and efficient SQL queries.
 - **.NET 8**: Unified platform for developing modern web, desktop and cloud applications.
-
-## Features
-
-- **Clients View**: Easy navigation and handling of different routes.
-- **Clients Manage**: Dynamic content rendering using EJS templates.
-- **Address Manage**: Robust data storage and retrieval with MongoDB.
 
 ## 📁 Estrutura do projeto
 - #### Apresentation  
