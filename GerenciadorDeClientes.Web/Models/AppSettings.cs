@@ -5,9 +5,13 @@
         public WebApiGerenciadorDeClientes? webApiGerenciadorDeClientes { get; set; }
 
         public class WebApiGerenciadorDeClientes {
+            public int registrosPorPaginas { get; set; }
             public string? url { get; set; }
             public string? metodoAuth { get; set; }
             public string? metodoClientesListar { get; set; }
+            public string? metodoClientesPesquisarPorId { get; set; }
+            public string? metodoExcluirClientePorId { get; set; }
+            public string? metodoValidarDuplicidadeEmail { get; set; }
         }
     }
 }

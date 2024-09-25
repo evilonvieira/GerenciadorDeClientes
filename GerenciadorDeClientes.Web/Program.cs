@@ -3,6 +3,7 @@ using GerenciadorDeClientes.Web.Models;
 using GerenciadorDeClientes.Web.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
@@ -33,6 +34,11 @@ builder.Host.UseNLog();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit =  104857600; // 100 MB
+});
 
 builder.Services.AddAuthentication(options =>
 {

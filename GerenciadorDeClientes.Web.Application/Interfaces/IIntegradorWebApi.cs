@@ -11,5 +11,6 @@ namespace GerenciadorDeClientes.Web.Application.Interfaces
     {
         Task<ResultadoOperacao<T>> PostAsync<T>(string url, string method, string? bearerToken = null, object? body = null);
         Task<ResultadoOperacao<T>> GetAsync<T>(string url, string method, string? bearerToken = null);
+        Task<ResultadoOperacao> DeleteAsync(string url, string method, string bearerToken, long id);
     }
 }

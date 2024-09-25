@@ -1,4 +1,6 @@
+using GerenciadorDeClientes.Infra.CrossCutting;
 using GerenciadorDeClientes.WebApi.Application.DTOs;
+using GerenciadorDeClientes.WebApi.Domain.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -13,59 +15,35 @@ namespace GerenciadorDeClientes.WebApi.Controllers
     {
         private readonly ILogger<AuthController> _logger;
         private readonly IConfiguration _config;
+        private readonly IUsuarioService _usuarioService;
 
-        public AuthController(ILogger<AuthController> logger, IConfiguration config)
+        public AuthController(ILogger<AuthController> logger, IConfiguration config, IUsuarioService usuarioService)
         {
             _logger = logger;
             _config = config;
+            _usuarioService = usuarioService;
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginDTO login)
+        public async Task<ResultadoOperacao<TokenResponse>> Login([FromBody] LoginDTO login)
         {
             try
             {
+                var bearerToken = await _usuarioService.EfetuarLoginAsync(login);
+                if (string.IsNullOrWhiteSpace(bearerToken))
+                    throw new Exception("E-mail e/ou Senha inválidos");
 
+                return ResultadoOperacao<TokenResponse>.CriarResultadoComSucesso(
+                    new TokenResponse { Token = bearerToken }
+                );
             }
             catch (Exception error)
             {
-
-                throw;
+                return ResultadoOperacao<TokenResponse>.CriarResultadoComFalha(error.Message);
             }
-            if (IsValidUser(login)) // Valida as credenciais do usuário
-            {
-                var token = GenerateJwtToken(login);
-                return Ok(new { token });
-            }
-            return Unauthorized();
-        }
-        private string GenerateJwtToken(LoginDTO login)
-        {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-            var claims = new[]
-            {
-                //new Claim(ClaimTypes.Name, login.Username),
-                new Claim("CustomClaim", "CustomValue") // Claim personalizada
-            };
-
-            var token = new JwtSecurityToken(
-                issuer: _config["Jwt:Issuer"],
-                audience: _config["Jwt:Audience"],
-                claims: claims,
-                expires: DateTime.Now.AddMinutes(Convert.ToDouble(_config["Jwt:ExpireMinutes"])),
-                signingCredentials: credentials);
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        private bool IsValidUser(LoginDTO login)
-        {
-            // Lógica para validar o usuário (pode ser banco de dados ou hardcoded)
-            return login.Email == "user" && login.Senha == "password";
-        }
     }
 
-    
+
 }

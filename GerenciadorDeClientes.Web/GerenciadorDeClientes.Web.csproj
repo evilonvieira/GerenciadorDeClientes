@@ -15,7 +15,6 @@
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Helpers\" />
-    <Folder Include="wwwroot\css\" />
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\js\" />
     <Folder Include="wwwroot\lib\bootstrap\" />
@@ -31,6 +30,7 @@
   <ItemGroup>
     <ProjectReference Include="..\GerenciadorDeClientes.Web.Application\GerenciadorDeClientes.Web.Application.csproj" />
     <ProjectReference Include="..\GerenciadorDeClientes.Web.Services\GerenciadorDeClientes.Web.Services.csproj" />
+    <ProjectReference Include="..\GerenciadorDeClientes.WebApi.Domain.Core\GerenciadorDeClientes.WebApi.Domain.Core.csproj" />
   </ItemGroup>
 
 </Project>

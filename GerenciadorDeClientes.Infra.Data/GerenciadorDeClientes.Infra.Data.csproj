@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
-    <Folder Include="Repositories\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GerenciadorDeClientes.WebApi.Domain.Core\GerenciadorDeClientes.WebApi.Domain.Core.csproj" />
     <ProjectReference Include="..\GerenciadorDeClientes.WebApi.Domain\GerenciadorDeClientes.WebApi.Domain.csproj" />
   </ItemGroup>
 

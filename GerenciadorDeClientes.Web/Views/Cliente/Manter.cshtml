@@ -1,0 +1,274 @@
+﻿@model GerenciadorDeClientes.Web.Application.DTOs.ClienteDTO;
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_LayoutSistema.cshtml";
+}
+
+@section styles {
+    <style>
+        .card {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .label-nome, .label-email {
+            text-align: center;
+        }
+
+        .label-nome {
+            margin: 0;
+            font-family: Geomanist-Regular;
+        }
+
+        .label-email {
+            margin-bottom: 40px;
+            color: #2f2f2f;
+        }
+
+        .btn-deletar {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+
+        #imgLogotipo {
+            max-width: 64px;
+            max-height: 64px;
+        }
+
+        .action-button:disabled {
+            background-color: #ccc !important;
+            border: #ccc;
+            color: gray;
+        }
+    </style>
+}
+
+<div class="text-start d-flex justify-content-between align-items-center">
+    <p class="display-6">Clientes/ @(ViewBag.ModoCadastro ? "Cadastrar" : "Editar")</p>
+</div>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+}
+
+<div class="row mb-5">
+
+    @if (ViewBag.SucessoNaExclusao != null)
+    {
+        <div class="col-md-6 mx-auto d-flex justify-content-center flex-column align-items-center mt-5">
+            <div class="alert alert-success">Registro excluido com sucesso</div>
+            <a href="@Url.Action("Index", "Cliente", new { pagina = 1, registros = ViewBag.RegistrosPorPagina})" class=" btn btn-success btn-lg">Ok</a>
+        </div>
+    }
+    else
+    {
+        var cliente = Model;
+
+        <form action="@Url.Action("ManterCliente", "Cliente")" method="post" autocomplete="new-password">
+            <input autocomplete="false" name="hidden" type="text" style="display:none;">
+
+            <input type="text" name="IsNovo" value="@(ViewBag.ModoCadastro ? "1" : "0")" />
+            <div class="d-flex flex-column align-items-center justify-content-center">
+                <div class="card shadow-sm p-4">
+                    <div class="d-flex align-items-center justify-content-center flex-column pt-2 pb-3" width="100%">
+
+                        @{
+                            var srcImage = "/images/logo.png";
+                            if (!string.IsNullOrWhiteSpace(cliente.LogotipoModificado))
+                                srcImage = cliente.LogotipoModificado;
+
+
+                            var srcImageLimpar = "/images/logo.png";
+                            if (!string.IsNullOrWhiteSpace(cliente.Logotipo))
+                                srcImageLimpar = cliente.Logotipo;
+                        }
+                        <p>Logotipo</p>
+                        <img id="imgLogotipo" src="@srcImage" class="mb-3" />
+
+                        <input type='file' id="filePhoto" class="outview" onchange="readURL(this)" name="filePhoto"
+                               accept="image/x-png,image/png,image/gif,image/jpeg" />
+                        <div class="alert alert-warning w-100 alerta-w d-none"></div>
+                        <div>
+                            <button class="btn action-button btn-outline-dark btn-sm mb-0" type="button"
+                                    onclick="LimparUpload(TipoUpload.BADGE)" name="button">
+                                Restaurar
+                            </button>
+                            <button class="btn action-button btn-outline-info btn-sm mb-0 me-2"
+                                    onclick="EscolherMedia(TipoUpload.BADGE)" type="button" name="button">
+                                Mudar
+                            </button>
+                        </div>
+                    </div>
+
+                    <input type="text" name="Logotipo" id="Logotipo" value="@srcImageLimpar">
+                    <input type="text" name="LogotipoModificado" id="LogotipoModificado" value="@cliente.LogotipoModificado">
+
+
+                    <div class="card-body">
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="Nome" placeholder="Nome" value="@Model?.Nome">
+                            <label for="Nome">Nome</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="email" class="form-control" name="Email" placeholder="name@example.com" value="@Model?.Email">
+                            <label for="Email">E-mail</label>
+                        </div>
+
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                    </div>
+                </div>
+                <div class="d-flex flex-row align-items-center justify-content-center pt-4">
+                    <a href="@Url.Action("Index", "Cliente", new { pagina = 1, registros = ViewBag.RegistrosPorPagina})"
+                       class=" btn btn-outline-danger me-3 action-button">
+                        Cancelar
+                    </a>
+
+                    <input type="hidden" value="@cliente.Id" name="Id" />
+                    <button type="submit" class="btn btn-primary action-button">Salvar</button>
+                </div>
+            </div>
+        </form>
+    }
+
+</div>
+
+
+@section scripts {
+    <script>
+
+        function EscolherMedia(tipo) {
+            TipoUploadAtual = tipo;
+            showAlerta();
+            document.getElementById('filePhoto').click();
+        }
+
+        function showAlerta(msg) {
+            var alerta = document.querySelector('.alerta-w');
+            alerta.classList.add('d-none');
+            alerta.innerHTML = msg;
+            if (msg)
+                alerta.classList.remove('d-none');
+        }
+
+        function BloqueiaBotoes(flag) {
+            [...document.querySelectorAll('.action-button')].forEach((item, index) => {
+                if (flag)
+                    item.setAttribute('disabled', true);
+                else
+                    item.removeAttribute('disabled');
+            });
+        }
+
+        function definirFoto(src) {
+            /*
+            if (isSelecaoDeCapaDestaque)
+                document.getElementById('imgFotoCapaDestaque').setAttribute('src', src);
+            else
+                document.getElementById(isSelecaoDeCapa ? 'imgFotoCapa' : 'imgFotoBadge').setAttribute('src', src);
+            */
+
+            document.getElementById(PegaNomeCampoMediaPadrao(TipoUploadAtual, TipoCampo.IMAGE)).setAttribute('src', src);
+        }
+
+        function PegaNomeCampoMediaPadrao(tipo, campo) {
+            var idCampoTextMediaPadrao = 'LogotipoModificado';
+            var idCampoTextMediaBase64 = 'Logotipo';
+            var idPicture = 'imgLogotipo';
+
+
+            if (campo == TipoCampo.MEDIA)
+                return idCampoTextMediaPadrao;
+
+            if (campo == TipoCampo.BASE64)
+                return idCampoTextMediaBase64;
+
+            if (campo == TipoCampo.IMAGE)
+                return idPicture;
+
+            return "";
+        }
+
+        const TipoUpload = Object.freeze({
+            NONE: 0,
+            LOGOTIPO: 1,
+        });
+
+        const TipoCampo = Object.freeze({
+            NONE: 0,
+            IMAGE: 3,
+        });
+
+
+        let TipoUploadAtual = TipoUpload.NONE;
+
+
+        function LimparUpload(tipo) {
+            TipoUploadAtual = tipo;
+            var idCampoTextMediaPadrao = PegaNomeCampoMediaPadrao(tipo, TipoCampo.MEDIA);
+            var idCampoTextMediaBase64 = PegaNomeCampoMediaPadrao(tipo, TipoCampo.BASE64);
+
+            var fotoPadrao = document.getElementById("Logotipo").value;
+            definirFoto(fotoPadrao);
+            document.getElementById(idCampoTextMediaBase64).value = '';
+        }
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+
+                //Tratando o tipo de upload
+                if (input.files[0].type != "image/png" &&
+                    input.files[0].type != "image/jpeg" &&
+                    input.files[0].type != "image/gif" &&
+                    input.files[0].type != "image/bmp"
+                ) {
+                    showAlerta("Arquivo selecionado não aceito. <br />Somente é permitido upload de arquivos ( png | jpeg | gif | bmp )");
+                    input.value = "";
+                    return;
+                }
+
+                // Defina o limite de tamanho em MB (neste exemplo, 5 MB)
+                const limiteTamanho = 5 * 1024 * 1024; // 5 MB em bytes
+                // Validar o tamanho do arquivo
+                if (input.files[0].size > limiteTamanho) {
+                    input.value = "";
+                    showAlerta('Arquivo muito grande. O tamanho máximo permitido é 5 MB.');
+                    return;
+                }
+
+
+
+
+                BloqueiaBotoes(true);
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    definirFoto(e.target.result);
+
+                    /*
+                    if (isSelecaoDeCapaDestaque) {
+                        document.getElementById('fotoBase64-capa-destaque').value = e.target.result;
+                        setInterval(() => {
+                            BloqueiaBotoes(false);
+                        }, 1000);
+                    } else {
+                        document.getElementById(isSelecaoDeCapa ? 'fotoBase64-capa' : 'fotoBase64-badge').value = e.target.result;
+                        setInterval(() => {
+                            BloqueiaBotoes(false);
+                        }, 1000);
+                    }
+                    */
+
+                    document.getElementById(PegaNomeCampoMediaPadrao(TipoUploadAtual, TipoCampo.BASE64)).value = e.target.result;
+                    setInterval(() => {
+                        BloqueiaBotoes(false);
+                    }, 1000);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+}

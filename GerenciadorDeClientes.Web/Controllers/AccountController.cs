@@ -3,6 +3,7 @@ using GerenciadorDeClientes.Infra.CrossCutting.Extensions;
 using GerenciadorDeClientes.Web.Application.Interfaces;
 using GerenciadorDeClientes.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Win32;
 
 namespace GerenciadorDeClientes.Web.Controllers
 {
@@ -49,7 +50,16 @@ namespace GerenciadorDeClientes.Web.Controllers
 
 
                 //criando cookie de autenticação
+                // Armazenar o token em um cookie (ou outro local, como localStorage)
+                HttpContext.Response.Cookies.Append("AuthToken", resultadoLogin.Retorno.Token, new CookieOptions
+                {
+                    HttpOnly = true,
+                    Secure = true,
+                    SameSite = SameSiteMode.Strict, // Para evitar CSRF
+                    Expires = DateTime.UtcNow.AddMinutes(30)
+                });
 
+                return RedirectToAction("Index", "Cliente", new { pagina = 1, registros = _appSettings.webApiGerenciadorDeClientes?.registrosPorPaginas ?? 10 });
 
             }
             catch (ArgumentException warning)

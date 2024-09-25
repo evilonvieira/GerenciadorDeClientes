@@ -1,4 +1,5 @@
-﻿using GerenciadorDeClientes.WebApi.Domain.Models;
+﻿using GerenciadorDeClientes.Infra.Data.Mapping;
+using GerenciadorDeClientes.WebApi.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,16 @@ namespace GerenciadorDeClientes.Infra.Data.Context
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Aplicando as configurações de mapeamento
+            modelBuilder.ApplyConfiguration(new ClienteMap());
+
+            base.OnModelCreating(modelBuilder);
+        }
+
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
 
     }
 }

@@ -23,8 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GerenciadorDeClientes.CrossCutting\GerenciadorDeClientes.Infra.CrossCutting.csproj" />
     <ProjectReference Include="..\GerenciadorDeClientes.Infra.Data\GerenciadorDeClientes.Infra.Data.csproj" />
     <ProjectReference Include="..\GerenciadorDeClientes.WebApi.Application\GerenciadorDeClientes.WebApi.Application.csproj" />
+    <ProjectReference Include="..\GerenciadorDeClientes.WebApi.Domain.Services\GerenciadorDeClientes.WebApi.Domain.Services.csproj" />
   </ItemGroup>
 
 </Project>

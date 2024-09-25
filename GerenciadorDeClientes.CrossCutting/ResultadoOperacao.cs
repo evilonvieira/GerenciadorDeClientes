@@ -21,6 +21,7 @@
         public bool Falha => !_sucesso;
 
         protected ResultadoOperacao(bool sucesso) { _sucesso = sucesso; }
+        protected ResultadoOperacao() { _sucesso = true; }
 
         public static ResultadoOperacao CriarResultadoComSucesso()
         {
@@ -56,6 +57,7 @@
         public TRetorno Retorno { get; set; }
 
         private ResultadoOperacao(bool sucesso) : base(sucesso) { }
+        private ResultadoOperacao() : base(true) { }
 
 
         public static ResultadoOperacao<TRetorno> CriarResultadoComSucesso(TRetorno retorno)

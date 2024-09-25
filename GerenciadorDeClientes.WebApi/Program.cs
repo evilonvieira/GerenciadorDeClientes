@@ -3,6 +3,12 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using GerenciadorDeClientes.WebApi.Domain.Services;
+using GerenciadorDeClientes.WebApi.Domain.Core.Interfaces.Services;
+using GerenciadorDeClientes.WebApi.Application;
+using GerenciadorDeClientes.WebApi.Domain.Core.Interfaces.Repositories;
+using GerenciadorDeClientes.Infra.Data;
+using GerenciadorDeClientes.Infra.Data.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +17,21 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+
+//AppSettings
+var appSettings = new AppSettings();
+builder.Configuration.Bind(appSettings);
+
+
+//IoC
+builder.Services.AddSingleton(appSettings);
+builder.Services.AddSingleton<IJwtTokenService, JwtTokenService>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<IClienteService, ClienteService>();
+//
+builder.Services.AddScoped < IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 
 
 // Configurar Autenticação JWT
