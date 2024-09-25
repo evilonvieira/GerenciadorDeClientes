@@ -55,6 +55,20 @@ namespace GerenciadorDeClientes.WebApi.Controllers
             }
         }
 
+        [Authorize, HttpGet("pesquisar/enderecos/{id}")]
+        public async Task<ResultadoOperacao<Cliente>> ListarClienteComEndereco(long id)
+        {
+            try
+            {
+                var registro = await _clienteService.ListarComEnderecoAsync(id);
+                return ResultadoOperacao<Cliente>.CriarResultadoComSucesso(registro);
+            }
+            catch (Exception error)
+            {
+                return ResultadoOperacao<Cliente>.CriarResultadoComFalha(error.Message);
+            }
+        }
+
         [Authorize, HttpDelete("excluir/{id}")]
         public async Task<ResultadoOperacao> ExcluirCliente(long id)
         {
@@ -96,10 +110,7 @@ namespace GerenciadorDeClientes.WebApi.Controllers
                 return ResultadoOperacao<Cliente>.CriarResultadoComFalha(error.Message);
             }
         }
+
     }
 
-    public class ClienteModel {
-        public required string Username { get; set; } 
-        public required string Password { get; set; } 
-    }
 }

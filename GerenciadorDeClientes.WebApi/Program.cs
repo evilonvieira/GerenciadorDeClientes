@@ -30,10 +30,12 @@ builder.Services.AddSingleton(appSettings);
 builder.Services.AddSingleton<IJwtTokenService, JwtTokenService>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IClienteService, ClienteService>();
+builder.Services.AddScoped<IEnderecoClienteService, EnderecoClienteService>();
 //
-builder.Services.AddScoped < IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
+builder.Services.AddScoped<IEnderecoClienteRepository, EnderecoClienteRepository>();
 
 
 // Adicionar AutoMapper aos serviços

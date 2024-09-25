@@ -14,7 +14,7 @@ namespace GerenciadorDeClientes.Infra.Data.Context
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
-
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Aplicando as configurações de mapeamento

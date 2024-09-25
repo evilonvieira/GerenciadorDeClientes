@@ -36,6 +36,12 @@ namespace GerenciadorDeClientes.Infra.Data.Repositories
             return await _context.Usuarios.FirstOrDefaultAsync(x => x.Email == email && x.Senha == senha);
         }
 
+        public async Task<Cliente?> PerquisarComEnderecosAsync(long id)
+        {
+            var entity = await _context.Clientes.Include("Enderecos").FirstOrDefaultAsync(x => x.Id == id);
+            return entity;
+        }
+
         public async Task<bool> ValidarDuplicidadeDeEmailAsync(string email, long id)
         {
             if (id == 0)

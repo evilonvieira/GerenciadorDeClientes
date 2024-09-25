@@ -54,7 +54,14 @@ namespace GerenciadorDeClientes.WebApi.Domain.Services
 
         public async Task<Cliente> ListarAsync(long id)
         {
-            return await _clienteRepository.GetByIdAsync((int)id);
+            var entity = await _clienteRepository.GetByIdAsync((int)id);
+            return entity;
+        }
+
+        public async Task<Cliente> ListarComEnderecoAsync(long id)
+        {
+            var entity = await _clienteRepository.PerquisarComEnderecosAsync((int)id);
+            return entity;
         }
 
         public async Task<PaginacaoLista<Cliente>> ListarPaginadoAsync(int pagina, int qtdRegistrosPorPagina)

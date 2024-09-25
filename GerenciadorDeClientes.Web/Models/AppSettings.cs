@@ -13,6 +13,8 @@
             public string? metodoExcluirClientePorId { get; set; }
             public string? metodoValidarDuplicidadeEmail { get; set; }
             public string? metodoSalvar { get; set; }
+            public string? metodoClientesPesquisarComEnderecosPorId { get; set; }
+            public string? metodoSalvarEndereco { get; set; }
         }
     }
 }
