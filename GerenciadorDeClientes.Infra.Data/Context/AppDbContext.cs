@@ -19,12 +19,14 @@ namespace GerenciadorDeClientes.Infra.Data.Context
         {
             // Aplicando as configurações de mapeamento
             modelBuilder.ApplyConfiguration(new ClienteMap());
+            modelBuilder.ApplyConfiguration(new EnderecoMap());
 
             base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Endereco> Enderecos { get; set; }
 
     }
 }

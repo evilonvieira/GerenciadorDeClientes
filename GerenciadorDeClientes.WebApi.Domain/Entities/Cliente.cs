@@ -12,5 +12,8 @@ namespace GerenciadorDeClientes.WebApi.Domain.Entities
         public string Nome { get; set; }
         public string Email { get; set; }
         public string? Logotipo { get; set; }
+
+        // 1:N
+        public ICollection<Endereco> Enderecos { get; set; }
     }
 }

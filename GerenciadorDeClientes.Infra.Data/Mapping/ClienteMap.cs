@@ -19,12 +19,12 @@ namespace GerenciadorDeClientes.Infra.Data.Mapping
             builder.Property(c => c.Email).IsRequired().HasMaxLength(100);
             builder.Property(c => c.Logotipo);
 
-            /*
-            builder.HasMany(c => c.Logradouros)
+            
+            builder.HasMany(c => c.Enderecos)
             .WithOne(l => l.Cliente)
             .HasForeignKey(l => l.IdCliente)
             .OnDelete(DeleteBehavior.Cascade);
-            */
+            
         }
     }
 }

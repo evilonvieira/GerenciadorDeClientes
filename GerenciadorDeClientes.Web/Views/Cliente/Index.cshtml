@@ -70,7 +70,13 @@
                     <p class="label-nome">@cliente.Nome</p>
                     <p class="label-email">@cliente.Email</p>
                     <div class="d-flex justify-content-between align-items-center">
-                        <button type="button" class="btn btn-sm btn-outline-primary">Endereços</button>
+                        <a class="btn btn-sm btn-outline-primary" href="@Url.Action("Enderecos", "Cliente", new { id = cliente.Id})">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Endereços
+                        </a>
+
+
+
                         <div class="btn-group">
                             <a class="btn btn-sm btn-outline-secondary" href="@Url.Action("Editar", "Cliente", new { id = cliente.Id})">
                                 <i class="fas fa-edit"></i>

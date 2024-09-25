@@ -327,7 +327,7 @@ namespace GerenciadorDeClientes.Web.Controllers
 
 
 
-                return View("Manter", resultadoLogin.Retorno);
+                return View("Enderecos", resultadoLogin.Retorno);
             }
             catch (Exception error)
             {

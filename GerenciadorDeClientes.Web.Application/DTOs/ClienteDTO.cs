@@ -15,6 +15,8 @@ namespace GerenciadorDeClientes.Web.Application.DTOs
         public string? LogotipoModificado { get; set; }
         public int IsNovo { get; set; }
 
+        public IEnumerable<EnderecoDTO> Enderecos { get; set; }
+
         public void Validate()
         {
             if (string.IsNullOrEmpty(Nome))
