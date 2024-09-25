@@ -94,7 +94,7 @@ namespace GerenciadorDeClientes.Web.Services
                 if(objetoRetorno == null)
                     return ResultadoOperacao<T>.CriarResultadoComFalha(contentResponse);
 
-                return ResultadoOperacao<T>.CriarResultadoComSucesso(objetoRetorno.Retorno);
+                return objetoRetorno; // ResultadoOperacao<T>.CriarResultadoComSucesso(objetoRetorno.Retorno);
 
             }
             catch (Exception error)

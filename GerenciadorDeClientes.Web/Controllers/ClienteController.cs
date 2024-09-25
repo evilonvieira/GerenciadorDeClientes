@@ -13,6 +13,7 @@ using Microsoft.Win32;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using GerenciadorDeClientes.Infra.CrossCutting.Extensions;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
+using GerenciadorDeClientes.WebApi.Domain.Entities;
 
 namespace GerenciadorDeClientes.Web.Controllers
 {
@@ -245,18 +246,16 @@ namespace GerenciadorDeClientes.Web.Controllers
                 //valida e-mail
 
 
-                /*
+                
                 var url = _appSettings.webApiGerenciadorDeClientes?.url ?? "";
-                var met = _appSettings.webApiGerenciadorDeClientes?.metodoExcluirClientePorId ?? "";
+                var met = _appSettings.webApiGerenciadorDeClientes?.metodoSalvar ?? "";
                 var token = Request.Cookies["AuthToken"];
                 if (string.IsNullOrEmpty(token))
                 {
                     throw new Exception("Token não encontrado no cookie.");
                 }
 
-                met += $"/{id}";
-
-                var resultadoLogin = await _integradorWebApi.DeleteAsync(url, met, token, id);
+                var resultadoLogin = await _integradorWebApi.PostAsync<Cliente>(url, met, token, model);
                 if (resultadoLogin == null)
                     throw new Exception("Falha ao estabelecer contato a api");
 
@@ -266,10 +265,12 @@ namespace GerenciadorDeClientes.Web.Controllers
                     else
                         throw new Exception(resultadoLogin.MensagemDeErro);
 
+                if(resultadoLogin.Sucesso && !string.IsNullOrWhiteSpace(resultadoLogin.MensagemDeErro))
+                    throw new ArgumentException(resultadoLogin.MensagemDeErro);
 
-                ViewBag.RegistrosPorPagina = _appSettings.webApiGerenciadorDeClientes.registrosPorPaginas;
-                ViewBag.SucessoNaExclusao = true;
-                */
+                
+                ViewBag.SucessoNoProcessamento = true;
+                
 
 
             }
@@ -289,6 +290,56 @@ namespace GerenciadorDeClientes.Web.Controllers
             return View("Manter", model);
         }
 
+
+
+
+        [Authorize, HttpGet("{id}/enderecos")]
+        public async Task<IActionResult> Enderecos([FromRoute] long id)
+        {
+            try
+            {
+                ViewBag.ModoCadastro = false;
+                ViewBag.RegistrosPorPagina = _appSettings.webApiGerenciadorDeClientes.registrosPorPaginas;
+
+
+                var url = _appSettings.webApiGerenciadorDeClientes?.url ?? "";
+                var met = _appSettings.webApiGerenciadorDeClientes?.metodoClientesPesquisarPorId ?? "";
+                var token = Request.Cookies["AuthToken"];
+                if (string.IsNullOrEmpty(token))
+                {
+                    throw new Exception("Token não encontrado no cookie.");
+                }
+
+                met += $"/{id}";
+
+                var resultadoLogin = await _integradorWebApi.GetAsync<ClienteDTO>(url, met, token);
+                if (resultadoLogin == null)
+                    throw new Exception("Falha ao estabelecer contato a api");
+
+                if (!resultadoLogin.Sucesso)
+                    if (string.IsNullOrWhiteSpace(resultadoLogin.MensagemDeErro))
+                        throw new Exception("Mensagem de erro vazia");
+                    else
+                        throw new Exception(resultadoLogin.MensagemDeErro);
+
+                if (resultadoLogin.Retorno == null)
+                    throw new Exception("Nenhum Token foi retornado da api");
+
+
+
+                return View("Manter", resultadoLogin.Retorno);
+            }
+            catch (Exception error)
+            {
+                ViewBag.Error = error.Message;
+            }
+
+            return View();
+        }
+
+
+
+
         private async Task ValidarDuplicidadeDeEmail(long id, string email)
         {
 
@@ -302,7 +353,7 @@ namespace GerenciadorDeClientes.Web.Controllers
 
             met += $"/{id}/{email}";
 
-            var resultadoLogin = await _integradorWebApi.GetAsync<ResultadoOperacao>(url, met, token);
+            var resultadoLogin = await _integradorWebApi.GetAsync<bool>(url, met, token);
             if (resultadoLogin == null)
                 throw new Exception("Falha ao estabelecer contato a api");
 
@@ -313,30 +364,6 @@ namespace GerenciadorDeClientes.Web.Controllers
                     throw new Exception(resultadoLogin.MensagemDeErro);
         }
 
-
-
-        [Authorize, HttpGet("privacy")]
-        public async Task<IActionResult> Privacy()
-        {
-            var token = Request.Cookies["AuthToken"];
-            if (string.IsNullOrEmpty(token))
-            {
-                throw new Exception("Token não encontrado no cookie.");
-            }
-
-            var client = _clientFactory.CreateClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var response = await client.GetAsync("https://localhost:7229/Cliente/list");
-            IList<ClienteModel> Clientes = new List<ClienteModel>();
-            if (response.IsSuccessStatusCode)
-            {
-                Clientes = await response.Content.ReadFromJsonAsync<List<ClienteModel>>();
-            }
-
-
-
-            return View(Clientes);
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

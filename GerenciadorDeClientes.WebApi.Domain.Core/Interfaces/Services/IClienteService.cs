@@ -16,5 +16,6 @@ namespace GerenciadorDeClientes.WebApi.Domain.Core.Interfaces.Services
         Task<Cliente> ListarAsync(long id);
         Task<bool> ValidarDuplicidadeDeEmailAsync(string email, long id);
         Task ExcluirAsync(long id);
+        Task<Cliente> ManterAsync(ClienteDTO clienteDTO);
     }
 }

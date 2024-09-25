@@ -12,6 +12,7 @@
             public string? metodoClientesPesquisarPorId { get; set; }
             public string? metodoExcluirClientePorId { get; set; }
             public string? metodoValidarDuplicidadeEmail { get; set; }
+            public string? metodoSalvar { get; set; }
         }
     }
 }

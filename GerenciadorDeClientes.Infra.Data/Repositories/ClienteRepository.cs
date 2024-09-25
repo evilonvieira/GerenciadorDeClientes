@@ -16,6 +16,21 @@ namespace GerenciadorDeClientes.Infra.Data.Repositories
         {
         }
 
+        public async Task<Cliente?> AtualizarAsync(Cliente clienteModificado)
+        {
+            Update(clienteModificado);
+            await SaveChangesAsync();
+            return clienteModificado;
+        }
+
+        public async Task<Cliente?> InserirAsync(Cliente novoCliente)
+        {
+            novoCliente.Id = 0;
+            await AddAsync(novoCliente);
+            await SaveChangesAsync();
+            return novoCliente;
+        }
+
         public async Task<Usuario?> ObterPorEmailSenhaAsync(string? email, string? senha)
         {
             return await _context.Usuarios.FirstOrDefaultAsync(x => x.Email == email && x.Senha == senha);

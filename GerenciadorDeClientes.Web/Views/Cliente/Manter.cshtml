@@ -57,10 +57,12 @@
 
 <div class="row mb-5">
 
-    @if (ViewBag.SucessoNaExclusao != null)
+    @if (ViewBag.SucessoNoProcessamento != null)
     {
         <div class="col-md-6 mx-auto d-flex justify-content-center flex-column align-items-center mt-5">
-            <div class="alert alert-success">Registro excluido com sucesso</div>
+            <div class="alert alert-success">
+                Registro @(ViewBag.ModoCadastro ? "cadastrado" : "atualizado") com sucesso
+            </div>
             <a href="@Url.Action("Index", "Cliente", new { pagina = 1, registros = ViewBag.RegistrosPorPagina})" class=" btn btn-success btn-lg">Ok</a>
         </div>
     }
@@ -71,7 +73,8 @@
         <form action="@Url.Action("ManterCliente", "Cliente")" method="post" autocomplete="new-password">
             <input autocomplete="false" name="hidden" type="text" style="display:none;">
 
-            <input type="text" name="IsNovo" value="@(ViewBag.ModoCadastro ? "1" : "0")" />
+            <input type="hidden" name="IsNovo" value="@(ViewBag.ModoCadastro ? "1" : "0")" />
+            <input type="hidden" name="Id" value="@cliente.Id" />
             <div class="d-flex flex-column align-items-center justify-content-center">
                 <div class="card shadow-sm p-4">
                     <div class="d-flex align-items-center justify-content-center flex-column pt-2 pb-3" width="100%">
@@ -81,6 +84,9 @@
                             if (!string.IsNullOrWhiteSpace(cliente.LogotipoModificado))
                                 srcImage = cliente.LogotipoModificado;
 
+                            if (!ViewBag.ModoCadastro)
+                                if (!string.IsNullOrWhiteSpace(cliente.Logotipo))
+                                    srcImage = cliente.Logotipo;
 
                             var srcImageLimpar = "/images/logo.png";
                             if (!string.IsNullOrWhiteSpace(cliente.Logotipo))
@@ -104,8 +110,8 @@
                         </div>
                     </div>
 
-                    <input type="text" name="Logotipo" id="Logotipo" value="@srcImageLimpar">
-                    <input type="text" name="LogotipoModificado" id="LogotipoModificado" value="@cliente.LogotipoModificado">
+                    <input type="hidden" name="Logotipo" id="Logotipo" value="@srcImageLimpar">
+                    <input type="hidden" name="LogotipoModificado" id="LogotipoModificado" value="@cliente.LogotipoModificado">
 
 
                     <div class="card-body">
@@ -119,7 +125,7 @@
                             <label for="Email">E-mail</label>
                         </div>
 
-                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger mt-3"></div>
                     </div>
                 </div>
                 <div class="d-flex flex-row align-items-center justify-content-center pt-4">

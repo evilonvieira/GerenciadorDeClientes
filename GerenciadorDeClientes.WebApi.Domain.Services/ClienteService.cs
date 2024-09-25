@@ -1,8 +1,10 @@
-﻿using GerenciadorDeClientes.Infra.Core.Util;
+﻿using AutoMapper;
+using GerenciadorDeClientes.Infra.Core.Util;
 using GerenciadorDeClientes.WebApi.Application.DTOs;
 using GerenciadorDeClientes.WebApi.Domain.Core.Interfaces.Repositories;
 using GerenciadorDeClientes.WebApi.Domain.Core.Interfaces.Services;
 using GerenciadorDeClientes.WebApi.Domain.Entities;
+using System.Reflection;
 
 namespace GerenciadorDeClientes.WebApi.Domain.Services
 {
@@ -10,11 +12,13 @@ namespace GerenciadorDeClientes.WebApi.Domain.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IClienteRepository _clienteRepository;
+        private readonly IMapper _mapper;
 
-        public ClienteService(IUnitOfWork unitOfWork, IClienteRepository clienteRepository)
+        public ClienteService(IUnitOfWork unitOfWork, IClienteRepository clienteRepository, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _clienteRepository = clienteRepository;
+            _mapper = mapper;
         }
 
 
@@ -58,12 +62,39 @@ namespace GerenciadorDeClientes.WebApi.Domain.Services
             return await _clienteRepository.ListaPaginadoAsync(pagina, qtdRegistrosPorPagina);
         }
 
+        public async Task<Cliente?> ManterAsync(ClienteDTO clienteDTO)
+        {
+            ValidaCliente(clienteDTO);
+
+            var emailInvalido = await ValidarDuplicidadeDeEmailAsync(clienteDTO.Email, clienteDTO.Id);
+            if (emailInvalido)
+                throw new Exception("E-mail ja cadastrado no sistema");
+
+            if (clienteDTO.Id == 0)
+                return await _clienteRepository.InserirAsync(_mapper.Map<Cliente>(clienteDTO));
+            else
+                return await _clienteRepository.AtualizarAsync(_mapper.Map<Cliente>(clienteDTO));
+        }
+
         public async Task<bool> ValidarDuplicidadeDeEmailAsync(string email, long id)
         {
             if (string.IsNullOrWhiteSpace(email))
                 throw new Exception("E-mail informado inválido");
 
-            return await _clienteRepository.ValidarDuplicidadeDeEmailAsync(email, id);
+            var resultado = await _clienteRepository.ValidarDuplicidadeDeEmailAsync(email, id);
+            return resultado;
+        }
+
+        private void ValidaCliente(ClienteDTO cliente)
+        {
+            if (cliente == null)
+                throw new Exception("Valores de entrada inválidos");
+
+            if (string.IsNullOrWhiteSpace(cliente.Email))
+                throw new Exception("E-mail não informado");
+
+            if (string.IsNullOrWhiteSpace(cliente.Nome))
+                throw new Exception("Nome não informada");
         }
 
         private void ValidaLogin(LoginDTO login)

@@ -17,10 +17,10 @@ namespace GerenciadorDeClientes.Web.Application.DTOs
 
         public void Validate()
         {
+            if (string.IsNullOrEmpty(Nome))
+                throw new ArgumentException("Informe o campo Nome");
             if (string.IsNullOrEmpty(Email))
                 throw new ArgumentException("Informe o campo E-mail");
-            if (string.IsNullOrEmpty(Nome))
-                throw new ArgumentException("Informe o campo Senha");
         }
     }
 }

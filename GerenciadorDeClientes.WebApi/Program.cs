@@ -9,6 +9,8 @@ using GerenciadorDeClientes.WebApi.Application;
 using GerenciadorDeClientes.WebApi.Domain.Core.Interfaces.Repositories;
 using GerenciadorDeClientes.Infra.Data;
 using GerenciadorDeClientes.Infra.Data.Repositories;
+using AutoMapper;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +34,10 @@ builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped < IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
+
+
+// Adicionar AutoMapper aos serviços
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
 // Configurar Autenticação JWT

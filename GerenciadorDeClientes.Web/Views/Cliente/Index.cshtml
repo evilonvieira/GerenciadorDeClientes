@@ -25,6 +25,15 @@
             right: 10px;
             top: 10px;
         }
+
+        .logotipo{
+            max-width: 62px;
+            max-height: 62px;
+        }
+
+        .container-foto{
+            min-height: 150px;
+        }
     </style>
 }
 
@@ -53,8 +62,8 @@
                 <a class="btn-deletar" href="@Url.Action("Excluir", "Cliente", new { id = cliente.Id})">
                     <i class="fas fa-trash"></i>
                 </a>
-                <div class="d-flex align-items-center justify-content-center pt-5 pb-3" width="100%">
-                    <img src="@(string.IsNullOrWhiteSpace(cliente.Logotipo) ? "/images/logo.png" : cliente.Logotipo )" />
+                <div class="d-flex align-items-center justify-content-center pt-5 pb-3 container-foto" width="100%">
+                    <img class="logotipo" src="@(string.IsNullOrWhiteSpace(cliente.Logotipo) ? "/images/logo.png" : cliente.Logotipo )" />
                 </div>
 
                 <div class="card-body">

@@ -1,5 +1,6 @@
 using GerenciadorDeClientes.Infra.Core.Util;
 using GerenciadorDeClientes.Infra.CrossCutting;
+using GerenciadorDeClientes.WebApi.Application.DTOs;
 using GerenciadorDeClientes.WebApi.Domain.Core.Interfaces.Services;
 using GerenciadorDeClientes.WebApi.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -79,6 +80,20 @@ namespace GerenciadorDeClientes.WebApi.Controllers
             catch (Exception error)
             {
                 return ResultadoOperacao<bool>.CriarResultadoComFalha(error.Message);
+            }
+        }
+
+        [Authorize, HttpPost("salvar")]
+        public async Task<ResultadoOperacao<Cliente>> SalvarCliente([FromBody] ClienteDTO cliente)
+        {
+            try
+            {
+                var resultado = await _clienteService.ManterAsync(cliente);
+                return ResultadoOperacao<Cliente>.CriarResultadoComSucesso(resultado);
+            }
+            catch (Exception error)
+            {
+                return ResultadoOperacao<Cliente>.CriarResultadoComFalha(error.Message);
             }
         }
     }
