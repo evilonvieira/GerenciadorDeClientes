@@ -23,7 +23,7 @@ Este sistema permite aos usuários:
 
 Construído em DDD para facilitar o entendimento, manutenção e escalabilidade do projeto.
 
-![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/project_structure_2.png)
+![image](docs/images/project_structure_2.png)
 
 ## :computer: Instalação
 
@@ -37,7 +37,7 @@ Construído em DDD para facilitar o entendimento, manutenção e escalabilidade 
 
 Abra as propriedades da solução no visual studio e configure a opção “Multiple startup projects”, conforme abaixo:
 
-![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/solution-properties.png)
+![image](docs/images/solution-properties.png)
 
 ## :floppy_disk: Migrations
 
@@ -61,13 +61,13 @@ Faça as seguintes alterações na string de conexão
 
 Defina o projeto "GerenciadorDeClientes.WebApi" como projeto inicial
 
-![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/startup-project.png)
+![image](docs/images/startup-project.png)
 
 ### Command
 
 Abra "Package Manager Console" e selecione o projeto "Infra\GerenciadorDeClientes.Infra.Data"
 
-![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/package-manager-console.png)
+![image](docs/images/package-manager-console.png)
 
 Execute o comando abaixo
 
@@ -85,7 +85,7 @@ Neste momento as migrações já criaram o usuário "Administrador", utilize as 
 > [!WARNING]
 > Revise a propriedade da url da webapi no app.settings do projeto "GerenciadorDeClientes.Web" e faça alterações se necessário.
 
-![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/login4.png)
+![image](docs/images/login4.png)
 
 ## :telephone_receiver: Suporte
 
