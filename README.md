@@ -39,7 +39,8 @@ The project uses migrations, so when downloading the project, configure the conn
 
 #### Connection String
 
-#### Path ####: GerenciadorDeClientes.WebApi > app.settings
+#### Path: 
+**GerenciadorDeClientes.WebApi > app.settings**
 
 **Example**
 ```
