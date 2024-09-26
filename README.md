@@ -40,9 +40,11 @@ The project uses migrations, so when downloading the project, configure the conn
 #### Connection String
 
 **Path**: GerenciadorDeClientes.WebApi > app.settings
-**Example**
-Server={instance-sql-server};Database=GerenciadorDeClientes;User Id={user-id-sql-server};Password={user-pass-sql-server};TrustServerCertificate=True;
 
+**Example**
+```
+Server={instance-sql-server};Database=GerenciadorDeClientes;User Id={user-id-sql-server};Password={user-pass-sql-server};TrustServerCertificate=True;
+```
 
 <div style="text-align: center;">
 
