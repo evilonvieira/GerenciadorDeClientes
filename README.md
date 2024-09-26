@@ -13,11 +13,10 @@ This system allows users to:
 
 ## :computer: Technologies Used
 
-- **Asp.Net MVC**: A framework for creating structured and scalable web applications..
-- **WebApi REST**: Allows you to create lightweight and scalable HTTP services for applications..
+- **Asp.Net MVC**: A framework for creating structured and scalable web applications.
+- **WebApi REST**: Allows you to create lightweight and scalable HTTP services for applications.
 - **SqlServer**: Robust relational database management system.
 - **Entity Framework**: Speeds up development by reducing repetitive code and complexity.
-- **Dapper**: Delivers superior performance and simplicity in straightforward and efficient SQL queries.
 - **.NET 8**: Unified platform for developing modern web, desktop and cloud applications.
 
 ## 📁 Project Structure
@@ -94,6 +93,6 @@ If you have any questions about Gerenciador de Clientes, would like to discuss a
 
 [linkedin](https://www.linkedin.com/in/evilon-do-nascimento-vieira-0924082a/)
 
-## ⚖️ Licença
+## ⚖️ License
 
 Gerenciador De Clientes is [MIT licensed](./LICENSE).
