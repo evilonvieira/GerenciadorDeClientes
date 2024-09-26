@@ -57,9 +57,13 @@ Make the following changes on connection string
 - **{user-id-sql-server}**: user id of your sql server instance
 - **{user-pass-sql-server}**: user pass of your sql server instance
 
+#### Startup Project
+
 Set project "GerenciadorDeClientes.WebApi" as startup project
 
 ![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/startup-project.png)
+
+#### Command
 
 Open "Package Manager Console" and select "Infra\GerenciadorDeClientes.Infra.Data" project
 
