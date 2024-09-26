@@ -20,32 +20,11 @@ This system allows users to:
 - **Dapper**: Delivers superior performance and simplicity in straightforward and efficient SQL queries.
 - **.NET 8**: Unified platform for developing modern web, desktop and cloud applications.
 
-## 📁 Estrutura do projeto
-- #### Apresentation  
+## 📁 Project Structure
 
-  ⭐ Controller: Controladores da API, responsáveis por receber requisições e enviar respostas.
+Built in DDD to facilitate understanding, maintenance and scalability of the project.
 
-- #### Application
-
-  ⭐ DTOS: Data Transfer Objects usados para passar dados entre camadas.
-  
-  ⭐ Interfaces: Contratos para os serviços.
-         
-  ⭐ Mappings: Mapeamento das classes DTOS & Entities.
-   
-  ⭐ Services: Contém a lógica de negócios de alto nível e chama métodos do repositório.
-
-- #### Domain
-   ⭐ Entities: Entidades do domínio.
-     
-   ⭐ Enums: Enumerações usadas nas entidades e/ou regras de negócio.
-
-   ⭐ Interfaces: Contratos para os repositórios.
-
-   ⭐ Interfaces:
-
-- #### Infrastructure
-    ⭐ Repositories: Implementações dos repositórios definidos na camada de Domínio.
+![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/project_structure_2.png)
 
 
 ## Preview
