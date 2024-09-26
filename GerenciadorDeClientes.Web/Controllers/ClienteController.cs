@@ -48,6 +48,7 @@ namespace GerenciadorDeClientes.Web.Controllers
         {
             try
             {
+                ViewBag.RegistrosPorPagina = _appSettings.webApiGerenciadorDeClientes.registrosPorPaginas;
                 var url = _appSettings.webApiGerenciadorDeClientes?.url ?? "";
                 var met = _appSettings.webApiGerenciadorDeClientes?.metodoClientesListar ?? "";
                 var token = Request.Cookies["AuthToken"];

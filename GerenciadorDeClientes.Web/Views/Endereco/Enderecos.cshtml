@@ -1,4 +1,5 @@
-﻿@model GerenciadorDeClientes.Web.Application.DTOs.ClienteDTO;
+﻿@using GerenciadorDeClientes.Infra.CrossCutting.Extensions
+@model GerenciadorDeClientes.Web.Application.DTOs.ClienteDTO;
 @{
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_LayoutSistema.cshtml";
@@ -109,14 +110,14 @@
                                     <td>@address.Complemento</td>
                                     <td>@address.Bairro</td>
                                     <td>@address.Cidade</td>
-                                    <td>@address.Uf</td>
+                                    <td>@address.Uf.SiglaUf()</td>
                                     <td>
                                         <a href="@Url.Action("AtualizarEnderecos", "ClienteEndereco", new { id = Model.Id, idEndereco = address.Id})"
                                            class=" btn btn-info me-3">
                                             <i class="fas fa-edit"></i>
                                             Editar
                                         </a>
-                                        <a href="@Url.Action("Index", "Cliente", new { pagina = 1, registros = ViewBag.RegistrosPorPagina})"
+                                        <a href="@Url.Action("Excluir", "ClienteEndereco", new { id = Model.Id, idEndereco = address.Id})"
                                            class=" btn btn-danger me-1">
                                             <i class="fas fa-trash"></i>
                                             Excluir

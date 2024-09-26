@@ -65,11 +65,11 @@
     </div>
     <div class="col-md-9">
         <div class="d-flex flex-column justify-content-between align-items-start mb-4 w-100">
-            <h3>Adicionar Logradouro</h3>
+            <h3>Excluir Logradouro</h3>
             @if (ViewBag.SucessoNoProcessamento != null)
             {
                 <div class="col-md-6 mx-auto d-flex justify-content-center flex-column align-items-center mt-5">
-                    <div class="alert alert-success">Registro @(ViewBag.ModoCadastro ? "cadastrado" : "atualizado") com sucesso</div>
+                    <div class="alert alert-success">Registro excluido com sucesso</div>
                     <a href="@Url.Action("Enderecos", "ClienteEndereco", new { id = cliente.Id})"
                        class=" btn btn-success btn-lg">Ok</a>
                 </div>
@@ -77,7 +77,6 @@
             else
             {
 
-                <form action="@Url.Action("ManterEnderecoCliente", "ClienteEndereco", new  {id = cliente.Id, idEndereco = endereco.Id })" method="post" autocomplete="new-password" class="w-100">
                     <input autocomplete="false" name="hidden" type="text" style="display:none;">
 
 
@@ -85,38 +84,37 @@
                     <input type="hidden" name="Id" value="@endereco.Id" />
 
 
-                    <div class="d-flex flex-column align-items-center justify-content-center">
+                <div class="d-flex flex-column align-items-center justify-content-center w-100">
                         <div class="card shadow-sm p-4 w-100">
 
                             <div class="card-body">
                                 <div class="row mb-3">
                                     <div class="form-floating col-md-10">
-                                        <input type="text" class="form-control" name="Logradouro" placeholder="Rua, Av, Estrada" value="@endereco.Logradouro">
+                                        <input type="text" class="form-control" disabled name="Logradouro" placeholder="Rua, Av, Estrada" value="@endereco.Logradouro">
                                         <label for="Logradouro">Logradouro</label>
                                     </div>
                                     <div class="form-floating col-md-2">
-                                        <input type="text" class="form-control" name="Numero" placeholder="999" value="@endereco.Numero">
+                                        <input type="text" class="form-control" disabled name="Numero" placeholder="999" value="@endereco.Numero">
                                         <label for="Numero">Nº</label>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="form-floating col-md-6">
-                                        <input type="text" class="form-control" name="Complemento" placeholder="" value="@endereco.Complemento">
+                                        <input type="text" class="form-control" disabled name="Complemento" placeholder="" value="@endereco.Complemento">
                                         <label for="Complemento">Complemento</label>
                                     </div>
                                     <div class="form-floating col-md-6">
-                                        <input type="text" class="form-control" name="Bairro" placeholder="" value="@endereco.Bairro">
+                                        <input type="text" class="form-control" disabled name="Bairro" placeholder="" value="@endereco.Bairro">
                                         <label for="Bairro">Bairro</label>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="form-floating col-md-10">
-                                        <input type="text" class="form-control" name="Cidade" placeholder="" value="@endereco.Cidade">
+                                        <input type="text" class="form-control" disabled name="Cidade" placeholder="" value="@endereco.Cidade">
                                         <label for="Cidade">Cidade</label>
                                     </div>
                                     <div class="form-floating col-md-2">
-
-                                        <select class="form-control" name="Uf" id="Uf">
+                                        <select class="form-control" disabled name="Uf" id="Uf">
                                             <option value="0">UF</option>
                                             <option value="12">AC</option>
                                             <option value="27">AL</option>
@@ -152,16 +150,23 @@
                                 <div asp-validation-summary="ModelOnly" class="alert alert-danger mt-3"></div>
                             </div>
                         </div>
-                        <div class="d-flex flex-row align-items-center justify-content-center pt-4">
-                            <a href="@Url.Action("Enderecos", "ClienteEndereco", new { id = cliente.Id})"
-                               class=" btn btn-outline-danger me-3 action-button">
-                                Cancelar
-                            </a>
+                        <div class="d-flex flex-column align-items-center justify-content-center pt-4">
+                            
 
-                            <button type="submit" class="btn btn-primary action-button">Salvar</button>
+                        <h2 style="max-width: 500px;" class="text-center mb-3">Deseja realmente excluir este endereço?</h2>
+                        <div class="d-flex flex-row align-items-center justify-content-center">
+                            <a href="@Url.Action("Enderecos", "ClienteEndereco", new { id = cliente.Id})"
+                               class=" btn btn-danger me-3 action-button">
+                                Não
+                            </a>
+                            <form action="@Url.Action("ExcluirEnderecoCliente", "ClienteEndereco")" method="post">
+                                <input type="hidden" value="@endereco.Id" name="Id" />
+                                <input type="hidden" value="@cliente.Id" name="IdCliente" />
+                                <button type="submit" class="btn btn-primary">Sim</button>
+                            </form>
+                        </div>
                         </div>
                     </div>
-                </form>
             }
 
         </div>

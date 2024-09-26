@@ -26,12 +26,12 @@
             top: 10px;
         }
 
-        .logotipo{
+        .logotipo {
             max-width: 62px;
             max-height: 62px;
         }
 
-        .container-foto{
+        .container-foto {
             min-height: 150px;
         }
     </style>
@@ -74,9 +74,6 @@
                             <i class="fas fa-map-marker-alt"></i>
                             Endereços
                         </a>
-
-
-
                         <div class="btn-group">
                             <a class="btn btn-sm btn-outline-secondary" href="@Url.Action("Editar", "Cliente", new { id = cliente.Id})">
                                 <i class="fas fa-edit"></i>
@@ -89,3 +86,41 @@
         </div>
     }
 </div>
+<div class="d-flex justify-content-between">
+    <label>
+        Página  @Model.PageNumber de @Model.TotalPages
+    </label>
+
+    <div>
+        @if (Model.HasPreviousPage)
+        {
+            <a class="btn btn-primary me-2" href="@Url.Action("Index", "Cliente", new { pagina = Model.PageNumber - 1, registros = ViewBag.RegistrosPorPagina ?? 10 })">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+        }
+        else
+        {
+            <button disabled class="btn btn-secondary me-2">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+        }
+        @if (Model.HasNextPage)
+        {
+            <a class="btn btn-primary" href="@Url.Action("Index", "Cliente", new { pagina = Model.PageNumber + 1, registros = ViewBag.RegistrosPorPagina ?? 10 })">
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        }
+        else
+        {
+            <button disabled class="btn btn-secondary">
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        }
+    </div>
+</div>
+<input type="hidden" value="@Model.TotalPages" />
+<input type="hidden" value="@Model.PageSize" />
+<input type="hidden" value="@Model.HasPreviousPage" />
+<input type="hidden" value="@Model.HasNextPage" />
+<input type="hidden" value="@Model.PageNumber" />
+<input type="hidden" value="@Model.TotalItems" />

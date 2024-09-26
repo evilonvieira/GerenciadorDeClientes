@@ -120,30 +120,6 @@ namespace GerenciadorDeClientes.Web.Controllers
                 ViewBag.RegistrosPorPagina = _appSettings.webApiGerenciadorDeClientes.registrosPorPaginas;
 
                 var cliente = await PesquisaClienteDoEnderecoAsync(id);
-                /*
-                var url = _appSettings.webApiGerenciadorDeClientes?.url ?? "";
-                var met = _appSettings.webApiGerenciadorDeClientes?.metodoClientesPesquisarComEnderecosPorId ?? "";
-                var token = Request.Cookies["AuthToken"];
-                if (string.IsNullOrEmpty(token))
-                {
-                    throw new Exception("Token não encontrado no cookie.");
-                }
-
-                met += $"/{id}";
-
-                var resultadoLogin = await _integradorWebApi.GetAsync<ClienteDTO>(url, met, token);
-                if (resultadoLogin == null)
-                    throw new Exception("Falha ao estabelecer contato a api");
-
-                if (!resultadoLogin.Sucesso)
-                    if (string.IsNullOrWhiteSpace(resultadoLogin.MensagemDeErro))
-                        throw new Exception("Mensagem de erro vazia");
-                    else
-                        throw new Exception(resultadoLogin.MensagemDeErro);
-
-                if (resultadoLogin.Retorno == null)
-                    throw new Exception("Nenhum Token foi retornado da api");
-                */
 
 
                 return View("../Endereco/Manter", new EnderecoViewModel
@@ -170,32 +146,6 @@ namespace GerenciadorDeClientes.Web.Controllers
 
 
                 var cliente = await PesquisaClienteDoEnderecoAsync(id);
-
-                /*
-                var url = _appSettings.webApiGerenciadorDeClientes?.url ?? "";
-                var met = _appSettings.webApiGerenciadorDeClientes?.metodoClientesPesquisarComEnderecosPorId ?? "";
-                var token = Request.Cookies["AuthToken"];
-                if (string.IsNullOrEmpty(token))
-                {
-                    throw new Exception("Token não encontrado no cookie.");
-                }
-
-                met += $"/{id}";
-
-                var resultadoLogin = await _integradorWebApi.GetAsync<ClienteDTO>(url, met, token);
-                if (resultadoLogin == null)
-                    throw new Exception("Falha ao estabelecer contato a api");
-
-                if (!resultadoLogin.Sucesso)
-                    if (string.IsNullOrWhiteSpace(resultadoLogin.MensagemDeErro))
-                        throw new Exception("Mensagem de erro vazia");
-                    else
-                        throw new Exception(resultadoLogin.MensagemDeErro);
-
-                if (resultadoLogin.Retorno == null)
-                    throw new Exception("Nenhum Token foi retornado da api");
-                */
-
 
                 var enderecoEscolhido = cliente.Enderecos.FirstOrDefault(x => x.Id == idEndereco);
                 if (enderecoEscolhido == null)
@@ -287,71 +237,54 @@ namespace GerenciadorDeClientes.Web.Controllers
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /*
-
-        [Authorize, HttpGet("excluir/{id}")]
-        public async Task<IActionResult> Excluir(long id)
+        [Authorize, HttpGet("excluir/{id}/{idEndereco}")]
+        public async Task<IActionResult> Excluir([FromRoute] long id, long idEndereco)
         {
+            ClienteDTO? cliente = null;
+            EnderecoDTO? enderecoEscolhido = null;
             try
             {
-                var url = _appSettings.webApiGerenciadorDeClientes?.url ?? "";
-                var met = _appSettings.webApiGerenciadorDeClientes?.metodoClientesPesquisarPorId ?? "";
-                var token = Request.Cookies["AuthToken"];
-                if (string.IsNullOrEmpty(token))
-                {
-                    throw new Exception("Token não encontrado no cookie.");
-                }
-
-                met += $"/{id}";
-
-                var resultadoLogin = await _integradorWebApi.GetAsync<ClienteDTO>(url, met, token);
-                if (resultadoLogin == null)
-                    throw new Exception("Falha ao estabelecer contato a api");
-
-                if (!resultadoLogin.Sucesso)
-                    if (string.IsNullOrWhiteSpace(resultadoLogin.MensagemDeErro))
-                        throw new Exception("Mensagem de erro vazia");
-                    else
-                        throw new Exception(resultadoLogin.MensagemDeErro);
-
-                if (resultadoLogin.Retorno == null)
-                    throw new Exception("Nenhum Token foi retornado da api");
-
-
+                ViewBag.ModoCadastro = false;
                 ViewBag.RegistrosPorPagina = _appSettings.webApiGerenciadorDeClientes.registrosPorPaginas;
 
-                return View(resultadoLogin.Retorno);
+
+                cliente = await PesquisaClienteDoEnderecoAsync(id);
+
+                enderecoEscolhido = cliente.Enderecos.FirstOrDefault(x => x.Id == idEndereco);
+                if (enderecoEscolhido == null)
+                    throw new Exception("Endereço não encontrado");
+
             }
             catch (Exception error)
             {
                 ViewBag.Error = error.Message;
             }
 
-            return View();
+            return View("../Endereco/Excluir", new EnderecoViewModel
+            {
+                Cliente = cliente ?? new ClienteDTO(),
+                Endereco = enderecoEscolhido ?? new EnderecoDTO()
+            });
         }
 
-        [Authorize, HttpPost("excluir")]
-        public async Task<IActionResult> ExcluirCliente([FromForm] long id)
+        [Authorize, HttpPost("excluir-endereco")]
+        public async Task<IActionResult> ExcluirEnderecoCliente([FromForm] long id, long idCliente)
         {
+            ClienteDTO? cliente = null;
+            EnderecoDTO? enderecoEscolhido = null;
             try
             {
+
+                cliente = await PesquisaClienteDoEnderecoAsync(idCliente);
+                enderecoEscolhido = cliente.Enderecos.FirstOrDefault(x => x.Id == id);
+                if (enderecoEscolhido == null)
+                    throw new Exception("Endereço não encontrado");
+
+
+                
+
                 var url = _appSettings.webApiGerenciadorDeClientes?.url ?? "";
-                var met = _appSettings.webApiGerenciadorDeClientes?.metodoExcluirClientePorId ?? "";
+                var met = _appSettings.webApiGerenciadorDeClientes?.metodoExcluirEnderecoPorId ?? "";
                 var token = Request.Cookies["AuthToken"];
                 if (string.IsNullOrEmpty(token))
                 {
@@ -369,87 +302,35 @@ namespace GerenciadorDeClientes.Web.Controllers
                         throw new Exception("Mensagem de erro vazia");
                     else
                         throw new Exception(resultadoLogin.MensagemDeErro);
-
+                
 
                 ViewBag.RegistrosPorPagina = _appSettings.webApiGerenciadorDeClientes.registrosPorPaginas;
-                ViewBag.SucessoNaExclusao = true;
-
-                return View("Excluir");
+                ViewBag.SucessoNoProcessamento = true;
             }
             catch (Exception error)
             {
                 ViewBag.Error = error.Message;
+
             }
 
-            return View();
+            return View("../Endereco/Excluir", new EnderecoViewModel
+            {
+                Cliente = cliente ?? new ClienteDTO(),
+                Endereco = enderecoEscolhido ?? new EnderecoDTO()
+            });
         }
 
 
-        [Authorize, HttpGet("cadastrar")]
-        public async Task<IActionResult> Cadastrar(long id)
-        {
-            try
-            {
-
-                ViewBag.RegistrosPorPagina = _appSettings.webApiGerenciadorDeClientes.registrosPorPaginas;
-                ViewBag.ModoCadastro = true;
-
-                return View("Manter", new ClienteDTO { Id = (int)id });
-            }
-            catch (Exception error)
-            {
-                ViewBag.Error = error.Message;
-            }
-
-            return View();
-        }
-
-
-        [Authorize, HttpGet("editar/{id}")]
-        public async Task<IActionResult> Editar([FromRoute] long id)
-        {
-            try
-            {
-                ViewBag.ModoCadastro = false;
-                ViewBag.RegistrosPorPagina = _appSettings.webApiGerenciadorDeClientes.registrosPorPaginas;
-
-
-                var url = _appSettings.webApiGerenciadorDeClientes?.url ?? "";
-                var met = _appSettings.webApiGerenciadorDeClientes?.metodoClientesPesquisarPorId ?? "";
-                var token = Request.Cookies["AuthToken"];
-                if (string.IsNullOrEmpty(token))
-                {
-                    throw new Exception("Token não encontrado no cookie.");
-                }
-
-                met += $"/{id}";
-
-                var resultadoLogin = await _integradorWebApi.GetAsync<ClienteDTO>(url, met, token);
-                if (resultadoLogin == null)
-                    throw new Exception("Falha ao estabelecer contato a api");
-
-                if (!resultadoLogin.Sucesso)
-                    if (string.IsNullOrWhiteSpace(resultadoLogin.MensagemDeErro))
-                        throw new Exception("Mensagem de erro vazia");
-                    else
-                        throw new Exception(resultadoLogin.MensagemDeErro);
-
-                if (resultadoLogin.Retorno == null)
-                    throw new Exception("Nenhum Token foi retornado da api");
 
 
 
-                return View("Manter", resultadoLogin.Retorno);
-            }
-            catch (Exception error)
-            {
-                ViewBag.Error = error.Message;
-            }
 
-            return View();
-        }
 
-        */
+
+
+
+
+
 
 
 

@@ -13,3 +13,11 @@ footer {
 main {
     min-height: calc(100vh - 125px);
 }
+
+@media (max-width: 1200px) {
+    .container, .container-lg, .container-md, .container-sm {
+        min-width: 100% !important;
+        width: 100% !important;
+        max-width: 99% !important;
+    }
+}

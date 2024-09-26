@@ -15,6 +15,7 @@
             public string? metodoSalvar { get; set; }
             public string? metodoClientesPesquisarComEnderecosPorId { get; set; }
             public string? metodoSalvarEndereco { get; set; }
+            public string? metodoExcluirEnderecoPorId { get; set; }
         }
     }
 }
