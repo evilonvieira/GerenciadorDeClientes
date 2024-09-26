@@ -2,7 +2,7 @@
 
 Welcome! This project was created with the main purpose of managing customers, being designed to be compatible with integrations between systems using RESTful.
 
-![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/sytem.png)
+![image](docs/images/sytem.png)
 
 ## :eye: Project Overview
 
@@ -23,7 +23,7 @@ This system allows users to:
 
 Built in DDD to facilitate understanding, maintenance and scalability of the project.
 
-![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/project_structure_2.png)
+![image](docs/images/project_structure_2.png)
 
 ## :computer: Installation
 
@@ -37,7 +37,7 @@ Built in DDD to facilitate understanding, maintenance and scalability of the pro
 
 Open the solution properties in visual studio and configure the “Multiple startup projects” option, as below:
 
-![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/solution-properties.png)
+![image](docs/images/solution-properties.png)
 
 ## :floppy_disk: Migrations
 
@@ -61,13 +61,13 @@ Make the following changes on connection string
 
 Set project "GerenciadorDeClientes.WebApi" as startup project
 
-![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/startup-project.png)
+![image](docs/images/startup-project.png)
 
 ### Command
 
 Open "Package Manager Console" and select "Infra\GerenciadorDeClientes.Infra.Data" project
 
-![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/package-manager-console.png)
+![image](docs/images/package-manager-console.png)
 
 Run command below
 
@@ -85,7 +85,7 @@ At this point, migrations have already created the "Administrador" user, use the
 > [!WARNING]
 > Review the webapi url entry in app.settings of project "GerenciadorDeClientes.Web" and make changes if necessary.
 
-![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/login4.png)
+![image](docs/images/login4.png)
 
 ## :telephone_receiver: Support
 
