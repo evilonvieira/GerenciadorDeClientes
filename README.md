@@ -43,7 +43,7 @@ Open the solution properties in visual studio and configure the “Multiple star
 
 The project uses migrations, so when downloading the project, configure the connection string in the app.settings file according to your SqlServer installation.
 
-#### Connection String
+### Connection String
 
 GerenciadorDeClientes.WebApi > app.settings
 
@@ -57,13 +57,13 @@ Make the following changes on connection string
 - **{user-id-sql-server}**: user id of your sql server instance
 - **{user-pass-sql-server}**: user pass of your sql server instance
 
-#### Startup Project
+### Startup Project
 
 Set project "GerenciadorDeClientes.WebApi" as startup project
 
 ![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/startup-project.png)
 
-#### Command
+### Command
 
 Open "Package Manager Console" and select "Infra\GerenciadorDeClientes.Infra.Data" project
 
@@ -77,6 +77,15 @@ Update-Database
 
 ## :floppy_disk: Run Project
 
+At this point, migrations have already created the "Administrator" user, use the credentials below to use the system.
+
+- **email**: admin@admin.com
+- **pass**: 123456
+
+![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/login.png)
+
+> [!IMPORTANT]
+> Review the url entry in app.settings and make changes if necessary.
 
 <div style="text-align: center;">
 
