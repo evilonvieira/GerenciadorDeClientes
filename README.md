@@ -88,7 +88,10 @@ At this point, migrations have already created the "Administrador" user, use the
 
 ![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/login4.png)
 
+## :telephone_receiver: Support
+
+If you have any questions about Gerenciador de Clientes, would like to discuss a bug report, or have questions about new integrations, feel free to contact me at.
 
 ## ⚖️ Licença
 
-GerenciadorDeClientes is [MIT licensed](./LICENSE).
+Gerenciador De Clientes is [MIT licensed](./LICENSE).
