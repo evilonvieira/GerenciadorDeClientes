@@ -4,14 +4,14 @@ Welcome! This project was created with the main purpose of managing customers, b
 
 ![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/sytem.png)
 
-## Project Overview
+## :eye: Project Overview
 
 This system allows users to:
 
 - **Clients Manage**: CRUD of Clients.
 - **Address Manage**: CRUD Client's address.
 
-## Technologies Used
+## T:computer: echnologies Used
 
 - **Asp.Net MVC**: A framework for creating structured and scalable web applications..
 - **WebApi REST**: Allows you to create lightweight and scalable HTTP services for applications..
@@ -33,6 +33,12 @@ Built in DDD to facilitate understanding, maintenance and scalability of the pro
 - **Visual Studio 2022 - Comunity**: [download](https://visualstudio.microsoft.com/pt-br/vs/community/)
 - **SqlServer 16 - Express**: [download](https://www.microsoft.com/pt-br/sql-server/sql-server-downloads)
 
+### Visual Studio
+
+Open the solution properties in visual studio and configure the “Multiple startup projects” option, as below:
+
+![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/solution-properties.png)
+
 ## :floppy_disk: Migrations
 
 The project uses migrations, so when downloading the project, configure the connection string in the app.settings file according to your SqlServer installation.
@@ -46,10 +52,18 @@ GerenciadorDeClientes.WebApi > app.settings
 Server={instance-sql-server};Database=GerenciadorDeClientes;User Id={user-id-sql-server};Password={user-pass-sql-server};TrustServerCertificate=True;
 ```
 
-Make the following changes
+Make the following changes on connection string
 - **{instance-sql-server}**: name of your sql server instance
 - **{user-id-sql-server}**: user id of your sql server instance
 - **{user-pass-sql-server}**: user pass of your sql server instance
+
+
+After, run command below
+
+```
+Update-Database
+```
+
 
 <div style="text-align: center;">
 
