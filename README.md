@@ -26,8 +26,15 @@ Built in DDD to facilitate understanding, maintenance and scalability of the pro
 
 ![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/project_structure_2.png)
 
+## 🤔 DEV Guide
 
-## Preview
+### Environment Tools
+
+- **Visual Studio 2022 - Comunity**: [download](https://visualstudio.microsoft.com/pt-br/vs/community/)
+- **SqlServer 16 - Express**: [download](https://www.microsoft.com/pt-br/sql-server/sql-server-downloads)
+
+
+
 
 <div style="text-align: center;">
 
