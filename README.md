@@ -2,7 +2,7 @@
 
 Bem-vindo! Este projeto foi criado com o objetivo principal de gerenciar clientes, sendo desenhado para ser compatível com integrações entre sistemas utilizando RESTful.
 
-![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/sytem.png)
+![image](docs/images/sytem.png)
 
 ## :eye: Overview do projeto
 
