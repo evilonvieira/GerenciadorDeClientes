@@ -44,8 +44,13 @@ GerenciadorDeClientes.WebApi > app.settings
 
 **Example**
 ```
-Server=**{instance-sql-server}**;Database=GerenciadorDeClientes;User Id=**{user-id-sql-server}**;Password=**{user-pass-sql-server}**;TrustServerCertificate=True;
+Server={instance-sql-server};Database=GerenciadorDeClientes;User Id={user-id-sql-server};Password={user-pass-sql-server};TrustServerCertificate=True;
 ```
+
+Make the following changes
+- **{instance-sql-server}**: name of your sql server instance
+- **{user-id-sql-server}**: user id of your sql server instance
+- **{user-pass-sql-server}**: user pass of your sql server instance
 
 <div style="text-align: center;">
 
