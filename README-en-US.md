@@ -33,11 +33,6 @@ Built in DDD to facilitate understanding, maintenance and scalability of the pro
 - **SqlServer 16 - Express**: [download](https://www.microsoft.com/pt-br/sql-server/sql-server-downloads)
 - **.NET 8.0**: [download](https://dotnet.microsoft.com/pt-br/download/dotnet/8.0)
 
-### Visual Studio
-
-Open the solution properties in visual studio and configure the “Multiple startup projects” option, as below:
-
-![image](docs/images/solution-properties.png)
 
 ## :floppy_disk: Migrations
 
@@ -76,6 +71,14 @@ Update-Database
 ```
 
 ## :computer: Run Project
+
+### Visual Studio
+
+Open the solution properties in visual studio and configure the “Multiple startup projects” option, as below:
+
+![image](docs/images/solution-properties.png)
+
+### System
 
 At this point, migrations have already created the "Administrador" user, use the credentials below to access the system.
 
