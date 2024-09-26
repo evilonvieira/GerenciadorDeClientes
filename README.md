@@ -33,13 +33,12 @@ Built in DDD to facilitate understanding, maintenance and scalability of the pro
 - **Visual Studio 2022 - Comunity**: [download](https://visualstudio.microsoft.com/pt-br/vs/community/)
 - **SqlServer 16 - Express**: [download](https://www.microsoft.com/pt-br/sql-server/sql-server-downloads)
 
-### Migrations
+## :floppy_disk: Migrations
 
 The project uses migrations, so when downloading the project, configure the connection string in the app.settings file according to your SqlServer installation.
 
 #### Connection String
 
-#### Path: 
 GerenciadorDeClientes.WebApi > app.settings
 
 **Example**
