@@ -11,7 +11,7 @@ This system allows users to:
 - **Clients Manage**: CRUD of Clients.
 - **Address Manage**: CRUD Client's address.
 
-## T:computer: echnologies Used
+## :computer: Technologies Used
 
 - **Asp.Net MVC**: A framework for creating structured and scalable web applications..
 - **WebApi REST**: Allows you to create lightweight and scalable HTTP services for applications..
@@ -32,6 +32,7 @@ Built in DDD to facilitate understanding, maintenance and scalability of the pro
 
 - **Visual Studio 2022 - Comunity**: [download](https://visualstudio.microsoft.com/pt-br/vs/community/)
 - **SqlServer 16 - Express**: [download](https://www.microsoft.com/pt-br/sql-server/sql-server-downloads)
+- **.NET 8.0**: [download](https://dotnet.microsoft.com/pt-br/download/dotnet/8.0)
 
 ### Visual Studio
 
@@ -75,37 +76,19 @@ Run command below
 Update-Database
 ```
 
-## :floppy_disk: Run Project
+## :computer: Run Project
 
-At this point, migrations have already created the "Administrator" user, use the credentials below to use the system.
+At this point, migrations have already created the "Administrador" user, use the credentials below to access the system.
 
 - **email**: admin@admin.com
-- **pass**: 123456
+- **password**: 123456
+
+> [!WARNING]
+> Review the webapi url entry in app.settings of project "GerenciadorDeClientes.Web" and make changes if necessary.
 
 ![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/login4.png)
 
-> [!WARNING]
-> Review the url entry in app.settings and make changes if necessary.
 
+## ⚖️ Licença
 
-### Home page with all the blogs
-
-![Blog Screenshot 5](preview/5.png)
-
-### View detailed blog posts after navigating inside
-
-![Blog Screenshot 2](preview/2.png)
-
-### About Page
-
-![Blog Screenshot 1](preview/1.png)
-
-### Create new blog page
-
-![Blog Screenshot 3](preview/3.png)
-
-### This page shows a 404 error page when a user navigates to a non-existent route
-
-![Blog Screenshot 4](preview/4.png)
-
-</div>
+GerenciadorDeClientes is [MIT licensed](./LICENSE).
