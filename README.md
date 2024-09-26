@@ -83,6 +83,7 @@ At this point, migrations have already created the "Administrator" user, use the
 - **pass**: 123456
 
 <div style="text-align: center;">
+<img src="https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/login.png">
 ![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/login.png)
 </div>
 
