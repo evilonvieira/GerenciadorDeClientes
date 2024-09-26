@@ -92,6 +92,8 @@ At this point, migrations have already created the "Administrador" user, use the
 
 If you have any questions about Gerenciador de Clientes, would like to discuss a bug report, or have questions about new integrations, feel free to contact me at.
 
+[linkedin](https://www.linkedin.com/in/evilon-do-nascimento-vieira-0924082a/)
+
 ## ⚖️ Licença
 
 Gerenciador De Clientes is [MIT licensed](./LICENSE).
