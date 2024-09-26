@@ -1,33 +1,33 @@
 # Gerenciador De Clientes
 
-Welcome! This project was created with the main purpose of managing customers, being designed to be compatible with integrations between systems using RESTful.
+Bem-vindo! Este projeto foi criado com o objetivo principal de gerenciar clientes, sendo desenhado para ser compatível com integrações entre sistemas utilizando RESTful.
 
 ![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/sytem.png)
 
-## :eye: Project Overview
+## :eye: Overview do projeto
 
-This system allows users to:
+Este sistema permite aos usuários:
 
-- **Clients Manage**: CRUD of Clients.
-- **Address Manage**: CRUD Client's address.
+- **Gerenciamento de clientes**: CRUD de clientes.
+- **Gerenciamento de endereço**: CRUD de endereços dos clientes.
 
-## :computer: Technologies Used
+## :computer: Tecnologias Utilizadas
 
-- **Asp.Net MVC**: A framework for creating structured and scalable web applications.
-- **WebApi REST**: Allows you to create lightweight and scalable HTTP services for applications.
-- **SqlServer**: Robust relational database management system.
-- **Entity Framework**: Speeds up development by reducing repetitive code and complexity.
-- **.NET 8**: Unified platform for developing modern web, desktop and cloud applications.
+- **Asp.Net MVC**: Uma estrutura para a criação de aplicações web estruturadas e escaláveis.
+- **WebApi REST**: Permite criar serviços HTTP leves e escaláveis ​​para aplicativos.
+- **SqlServer**: Sistema robusto de gerenciamento de banco de dados relacional.
+- **Entity Framework**: Acelera o desenvolvimento reduzindo código repetitivo e complexidade.
+- **.NET 8**: Plataforma unificada para desenvolvimento de aplicativos modernos para web, desktop e nuvem.
 
-## 📁 Project Structure
+## 📁 Estrutura do Projeto
 
-Built in DDD to facilitate understanding, maintenance and scalability of the project.
+Construído em DDD para facilitar o entendimento, manutenção e escalabilidade do projeto.
 
 ![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/project_structure_2.png)
 
-## :computer: Installation
+## :computer: Instalação
 
-### Environment Tools
+### Ferramentas
 
 - **Visual Studio 2022 - Comunity**: [download](https://visualstudio.microsoft.com/pt-br/vs/community/)
 - **SqlServer 16 - Express**: [download](https://www.microsoft.com/pt-br/sql-server/sql-server-downloads)
@@ -35,13 +35,13 @@ Built in DDD to facilitate understanding, maintenance and scalability of the pro
 
 ### Visual Studio
 
-Open the solution properties in visual studio and configure the “Multiple startup projects” option, as below:
+Abra as propriedades da solução no visual studio e configure a opção “Multiple startup projects”, conforme abaixo:
 
 ![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/solution-properties.png)
 
 ## :floppy_disk: Migrations
 
-The project uses migrations, so when downloading the project, configure the connection string in the app.settings file according to your SqlServer installation.
+O projeto utiliza migration, portanto ao baixar o projeto configure a string de conexão no arquivo app.settings de acordo com a instalação do seu SqlServer.
 
 ### Connection String
 
@@ -52,47 +52,47 @@ GerenciadorDeClientes.WebApi > app.settings
 Server={instance-sql-server};Database=GerenciadorDeClientes;User Id={user-id-sql-server};Password={user-pass-sql-server};TrustServerCertificate=True;
 ```
 
-Make the following changes on connection string
-- **{instance-sql-server}**: name of your sql server instance
-- **{user-id-sql-server}**: user id of your sql server instance
-- **{user-pass-sql-server}**: user pass of your sql server instance
+Faça as seguintes alterações na string de conexão
+- **{instance-sql-server}**: nome da sua instância do SQL Server
+- **{user-id-sql-server}**: ID do usuário da sua instância do SQL Server
+- **{user-pass-sql-server}**: Senha de usuário da sua instância do SQL Server
 
 ### Startup Project
 
-Set project "GerenciadorDeClientes.WebApi" as startup project
+Defina o projeto "GerenciadorDeClientes.WebApi" como projeto inicial
 
 ![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/startup-project.png)
 
 ### Command
 
-Open "Package Manager Console" and select "Infra\GerenciadorDeClientes.Infra.Data" project
+Abra "Package Manager Console" e selecione o projeto "Infra\GerenciadorDeClientes.Infra.Data"
 
 ![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/package-manager-console.png)
 
-Run command below
+Execute o comando abaixo
 
 ```
 Update-Database
 ```
 
-## :computer: Run Project
+## :computer: Executando o Projeto
 
-At this point, migrations have already created the "Administrador" user, use the credentials below to access the system.
+Neste momento as migrações já criaram o usuário "Administrador", utilize as credenciais abaixo para acessar o sistema.
 
 - **email**: admin@admin.com
 - **password**: 123456
 
 > [!WARNING]
-> Review the webapi url entry in app.settings of project "GerenciadorDeClientes.Web" and make changes if necessary.
+> Revise a propriedade da url da webapi no app.settings do projeto "GerenciadorDeClientes.Web" e faça alterações se necessário.
 
 ![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/login4.png)
 
-## :telephone_receiver: Support
+## :telephone_receiver: Suporte
 
-If you have any questions about Gerenciador de Clientes, would like to discuss a bug report, or have questions about new integrations, feel free to contact me at.
+Se você tiver alguma dúvida sobre o Gerenciador de Clientes, quiser discutir um relatório de bug ou tiver dúvidas sobre novas integrações, sinta-se à vontade para entrar em contato comigo em.
 
 [linkedin](https://www.linkedin.com/in/evilon-do-nascimento-vieira-0924082a/)
 
-## ⚖️ License
+## ⚖️ Licença
 
-Gerenciador De Clientes is [MIT licensed](./LICENSE).
+Gerenciador De Clientes é [MIT licensed](./LICENSE).
