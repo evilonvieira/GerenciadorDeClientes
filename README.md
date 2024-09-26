@@ -26,7 +26,7 @@ Built in DDD to facilitate understanding, maintenance and scalability of the pro
 
 ![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/project_structure_2.png)
 
-## 🤔 DEV Guide
+## :computer: Installation
 
 ### Environment Tools
 
@@ -36,6 +36,12 @@ Built in DDD to facilitate understanding, maintenance and scalability of the pro
 ### Migrations
 
 The project uses migrations, so when downloading the project, configure the connection string in the app.settings file according to your SqlServer installation.
+
+#### Connection String
+
+**Path**: GerenciadorDeClientes.WebApi > app.settings
+**Example**
+Server={instance-sql-server};Database=GerenciadorDeClientes;User Id={user-id-sql-server};Password={user-pass-sql-server};TrustServerCertificate=True;
 
 
 <div style="text-align: center;">
