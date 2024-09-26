@@ -82,11 +82,11 @@ At this point, migrations have already created the "Administrator" user, use the
 - **email**: admin@admin.com
 - **pass**: 123456
 
-<div style="text-align: center; width: 100%">
+<div style="display: flex; justify-content: center;">
 <img src="https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/login3.png">
 </div>
 
-![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/login3.png)
+![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/login4.png)
 
 > [!IMPORTANT]
 > Review the url entry in app.settings and make changes if necessary.
