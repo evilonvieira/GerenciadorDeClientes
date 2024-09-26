@@ -1,0 +1,136 @@
+﻿@using GerenciadorDeClientes.Infra.CrossCutting.Extensions
+@model GerenciadorDeClientes.Web.Application.DTOs.ClienteDTO;
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_LayoutSistema.cshtml";
+}
+
+@section styles {
+    <style>
+        .label-nome, .label-email {
+            text-align: center;
+        }
+
+        .label-nome {
+            margin: 0;
+            font-family: Geomanist-Regular;
+        }
+
+        .label-email {
+            margin-bottom: 40px;
+            color: #2f2f2f;
+        }
+
+        .btn-deletar {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+
+        #imgLogotipo {
+            max-width: 64px;
+            max-height: 64px;
+        }
+
+        .col-actions {
+            min-width: 230px;
+            width: 230px;
+            background-color:red;
+        }
+    </style>
+}
+
+<div class="text-start d-flex justify-content-between align-items-center">
+    <p class="display-6">Clientes/ Endereços</p>
+</div>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+}
+
+<div class="row mb-5 pt-5">
+
+    @if (ViewBag.SucessoNaExclusao != null)
+    {
+        <div class="col-md-6 mx-auto d-flex justify-content-center flex-column align-items-center mt-5">
+            <div class="alert alert-success">Registro excluido com sucesso</div>
+            <a href="@Url.Action("Index", "Cliente", new { pagina = 1, registros = ViewBag.RegistrosPorPagina})"
+               class=" btn btn-success btn-lg">Ok</a>
+        </div>
+    }
+    else
+    {
+        var cliente = Model;
+
+        <div class="col-md-3">
+            @Html.Partial("../Endereco/_partials/cliente")
+        </div>
+        <div class="col-md-9">
+            <div class="d-flex justify-content-between mb-4">
+                <h3>Logradouros</h3>
+                <a href="@Url.Action("AdicionarEnderecos", "ClienteEndereco", new { id = cliente.Id})" class="btn btn-primary"><i class="fas fa-plus"></i> Adicionar Endereço</a>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Logradouro</th>
+                            <th scope="col">Nº</th>
+                            <th scope="col">Complemento</th>
+                            <th scope="col">Bairro</th>
+                            <th scope="col">Cidade</th>
+                            <th scope="col">UF</th>
+                            <th scope="col" class="col-actions"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Enderecos == null || Model.Enderecos.Count() == 0)
+                        {
+                            <tr>
+                                <td colspan="10">
+                                    <h1 class="text-center w-100">
+                                        Nenhum endereço encontrado
+                                    </h1>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            for (int i = 0; i < Model.Enderecos.Count(); i++)
+                            {
+                                var address = Model.Enderecos.ToArray()[i];
+                                <tr>
+                                    <th scope="row">@address.Id</th>
+                                    <td>@address.Logradouro</td>
+                                    <td>@address.Numero</td>
+                                    <td>@address.Complemento</td>
+                                    <td>@address.Bairro</td>
+                                    <td>@address.Cidade</td>
+                                    <td>@address.Uf.SiglaUf()</td>
+                                    <td>
+                                        <a href="@Url.Action("AtualizarEnderecos", "ClienteEndereco", new { id = Model.Id, idEndereco = address.Id})"
+                                           class=" btn btn-info me-3">
+                                            <i class="fas fa-edit"></i>
+                                            Editar
+                                        </a>
+                                        <a href="@Url.Action("Excluir", "ClienteEndereco", new { id = Model.Id, idEndereco = address.Id})"
+                                           class=" btn btn-danger me-1">
+                                            <i class="fas fa-trash"></i>
+                                            Excluir
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    }
+
+</div>
