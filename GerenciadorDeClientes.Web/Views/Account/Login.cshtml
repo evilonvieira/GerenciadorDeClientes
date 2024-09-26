@@ -1,0 +1,26 @@
+﻿@model GerenciadorDeClientes.Web.Models.LoginViewModel;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form asp-action="Login" asp-controller="Account" asp-area="" method="post">
+    <img class="" src="/images/logo.png" alt="">
+    <p class="mb-5">Gerenciador de Clientes</p>
+    <h1 class="h3 mb-3 fw-normal">Login</h1>
+
+    <div class="form-floating">
+        <input type="email"  class="form-control" name="Email" placeholder="name@example.com" value="@Model?.Email">
+        <label for="Email">E-mail</label>
+    </div>
+    <div class="form-floating">
+        <input type="password"  class="form-control" name="Senha" placeholder="Password">
+        <label for="Senha">Senha</label>
+    </div>
+
+    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+    <button class="w-100 btn btn-lg btn-primary " type="submit">Entrar</button>
+    
+    <p class="mt-5 mb-2 text-muted">&copy; 2024</p>
+</form>
+
+

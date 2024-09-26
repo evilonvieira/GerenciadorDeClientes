@@ -1,0 +1,182 @@
+﻿@model GerenciadorDeClientes.Web.Models.EnderecoViewModel;
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_LayoutSistema.cshtml";
+}
+
+@section styles {
+    <style>
+        .label-nome, .label-email {
+            text-align: center;
+        }
+
+        .label-nome {
+            margin: 0;
+            font-family: Geomanist-Regular;
+        }
+
+        .label-email {
+            margin-bottom: 40px;
+            color: #2f2f2f;
+        }
+
+        .btn-deletar {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+
+        #imgLogotipo {
+            max-width: 64px;
+            max-height: 64px;
+        }
+
+        .form-floating label {
+            margin-left: 10px;
+        }
+
+        select.form-control {
+            appearance: button;
+            padding: 0 !important;
+            text-align: center;
+        }
+
+    </style>
+}
+
+<div class="text-start d-flex justify-content-between align-items-center">
+    <p class="display-6">Clientes/ Endereços</p>
+</div>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+}
+
+<div class="row mb-5 pt-5">
+    @{
+        var cliente = Model.Cliente;
+        var endereco = Model.Endereco;
+    }
+    <div class="col-md-3">
+        @Html.Partial("../Endereco/_partials/cliente", cliente)
+    </div>
+    <div class="col-md-9">
+        <div class="d-flex flex-column justify-content-between align-items-start mb-4 w-100">
+            <h3>Adicionar Logradouro</h3>
+            @if (ViewBag.SucessoNoProcessamento != null)
+            {
+                <div class="col-md-6 mx-auto d-flex justify-content-center flex-column align-items-center mt-5">
+                    <div class="alert alert-success">Registro @(ViewBag.ModoCadastro ? "cadastrado" : "atualizado") com sucesso</div>
+                    <a href="@Url.Action("Enderecos", "ClienteEndereco", new { id = cliente.Id})"
+                       class=" btn btn-success btn-lg">Ok</a>
+                </div>
+            }
+            else
+            {
+
+                <form action="@Url.Action("ManterEnderecoCliente", "ClienteEndereco", new  {id = cliente.Id, idEndereco = endereco.Id })" method="post" autocomplete="new-password" class="w-100">
+                    <input autocomplete="false" name="hidden" type="text" style="display:none;">
+
+
+                    <input type="hidden" name="IdCliente" value="@cliente.Id" />
+                    <input type="hidden" name="Id" value="@endereco.Id" />
+
+
+                    <div class="d-flex flex-column align-items-center justify-content-center">
+                        <div class="card shadow-sm p-4 w-100">
+
+                            <div class="card-body">
+                                <div class="row mb-3">
+                                    <div class="form-floating col-md-10">
+                                        <input type="text" class="form-control" name="Logradouro" placeholder="Rua, Av, Estrada" value="@endereco.Logradouro">
+                                        <label for="Logradouro">Logradouro</label>
+                                    </div>
+                                    <div class="form-floating col-md-2">
+                                        <input type="text" class="form-control" name="Numero" placeholder="999" value="@endereco.Numero">
+                                        <label for="Numero">Nº</label>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="form-floating col-md-6">
+                                        <input type="text" class="form-control" name="Complemento" placeholder="" value="@endereco.Complemento">
+                                        <label for="Complemento">Complemento</label>
+                                    </div>
+                                    <div class="form-floating col-md-6">
+                                        <input type="text" class="form-control" name="Bairro" placeholder="" value="@endereco.Bairro">
+                                        <label for="Bairro">Bairro</label>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="form-floating col-md-10">
+                                        <input type="text" class="form-control" name="Cidade" placeholder="" value="@endereco.Cidade">
+                                        <label for="Cidade">Cidade</label>
+                                    </div>
+                                    <div class="form-floating col-md-2">
+
+                                        <select class="form-control" name="Uf" id="Uf">
+                                            <option value="0">UF</option>
+                                            <option value="12">AC</option>
+                                            <option value="27">AL</option>
+                                            <option value="16">AP</option>
+                                            <option value="13">AM</option>
+                                            <option value="29">BA</option>
+                                            <option value="23">CE</option>
+                                            <option value="53">DF</option>
+                                            <option value="32">ES</option>
+                                            <option value="52">GO</option>
+                                            <option value="21">MA</option>
+                                            <option value="51">MT</option>
+                                            <option value="50">MS</option>
+                                            <option value="31">MG</option>
+                                            <option value="15">PA</option>
+                                            <option value="25">PB</option>
+                                            <option value="41">PR</option>
+                                            <option value="26">PE</option>
+                                            <option value="22">PI</option>
+                                            <option value="33">RJ</option>
+                                            <option value="24">RN</option>
+                                            <option value="43">RS</option>
+                                            <option value="11">RO</option>
+                                            <option value="14">RR</option>
+                                            <option value="42">SC</option>
+                                            <option value="35">SP</option>
+                                            <option value="28">SE</option>
+                                            <option value="17">TO</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div asp-validation-summary="ModelOnly" class="alert alert-danger mt-3"></div>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row align-items-center justify-content-center pt-4">
+                            <a href="@Url.Action("Enderecos", "ClienteEndereco", new { id = cliente.Id})"
+                               class=" btn btn-outline-danger me-3 action-button">
+                                Cancelar
+                            </a>
+
+                            <button type="submit" class="btn btn-primary action-button">Salvar</button>
+                        </div>
+                    </div>
+                </form>
+            }
+
+        </div>
+    </div>
+
+
+</div>
+
+@section scripts {
+    @if (ViewBag.SucessoNoProcessamento == null)
+    {
+        <script>
+            $(() => {
+                $('#Uf').val(@Model.Endereco.Uf);
+            });
+        </script>
+    }
+}
