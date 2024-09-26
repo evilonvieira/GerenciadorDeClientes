@@ -45,6 +45,9 @@ namespace GerenciadorDeClientes.Web.Controllers
                 if(!resultadoLogin.Sucesso)
                     throw new Exception(resultadoLogin.MensagemDeErro);
 
+                if(resultadoLogin.Sucesso && !string.IsNullOrWhiteSpace(resultadoLogin.MensagemDeErro))
+                    throw new ArgumentException(resultadoLogin.MensagemDeErro);
+
                 if (resultadoLogin.Retorno == null || string.IsNullOrWhiteSpace(resultadoLogin.Retorno.Token))
                     throw new Exception("Nenhum Token foi retornado da api");
 

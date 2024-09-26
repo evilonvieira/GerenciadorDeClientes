@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GerenciadorDeClientes.CrossCutting\GerenciadorDeClientes.Infra.CrossCutting.csproj" />
     <ProjectReference Include="..\GerenciadorDeClientes.WebApi.Domain.Core\GerenciadorDeClientes.WebApi.Domain.Core.csproj" />
   </ItemGroup>
 

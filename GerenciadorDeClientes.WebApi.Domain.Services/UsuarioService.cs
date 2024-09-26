@@ -1,4 +1,5 @@
-﻿using GerenciadorDeClientes.WebApi.Application.DTOs;
+﻿using GerenciadorDeClientes.Infra.CrossCutting.Security;
+using GerenciadorDeClientes.WebApi.Application.DTOs;
 using GerenciadorDeClientes.WebApi.Domain.Core.Interfaces.Repositories;
 using GerenciadorDeClientes.WebApi.Domain.Core.Interfaces.Services;
 using GerenciadorDeClientes.WebApi.Domain.Entities;
@@ -20,8 +21,12 @@ namespace GerenciadorDeClientes.WebApi.Domain.Services
         {
             ValidaLogin(loginDTO);
 
+
+            var senhaCriptografada = PasswordCriptor.Encrypt(loginDTO?.Senha);
+
+
             //busca o usuario na base de dados
-            var usuario = await _usuarioRepository.ObterPorEmailSenhaAsync(loginDTO?.Email, loginDTO?.Senha);
+            var usuario = await _usuarioRepository.ObterPorEmailSenhaAsync(loginDTO?.Email, senhaCriptografada);
             if (usuario == null)
                 return string.Empty;
 
