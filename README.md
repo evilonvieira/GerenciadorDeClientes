@@ -2,6 +2,8 @@
 
 Welcome! This project was created with the main purpose of managing customers, being designed to be compatible with integrations between systems using RESTful.
 
+![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/sytem.png)
+
 ## Project Overview
 
 This system allows users to:
