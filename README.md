@@ -57,12 +57,21 @@ Make the following changes on connection string
 - **{user-id-sql-server}**: user id of your sql server instance
 - **{user-pass-sql-server}**: user pass of your sql server instance
 
+Set project "GerenciadorDeClientes.WebApi" as startup project
 
-After, run command below
+![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/startup-project.png)
+
+Open "Package Manager Console" and select "Infra\GerenciadorDeClientes.Infra.Data" project
+
+![image](https://github.com/evilonvieira/GerenciadorDeClientes/blob/feature/estruturacao/docs/images/package-manager-console.png)
+
+Run command below
 
 ```
 Update-Database
 ```
+
+## :floppy_disk: Run Project
 
 
 <div style="text-align: center;">
