@@ -39,10 +39,14 @@
 
 <div class="text-start d-flex justify-content-between align-items-center">
     <p class="display-6">Clientes</p>
-    <a class="btn btn-primary" href="@Url.Action("Cadastrar", "Cliente", new { id = 0})">
-        <i class="fas fa-plus"></i>
-        Adicionar Cliente
-    </a>
+
+    @if (Model.TotalItems > 0)
+    {
+        <a class="btn btn-primary" href="@Url.Action("Cadastrar", "Cliente", new { id = 0})">
+            <i class="fas fa-plus"></i>
+            Adicionar Cliente
+        </a>
+    }
 </div>
 
 @if (ViewBag.Error != null)
@@ -52,72 +56,87 @@
     </div>
 }
 
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-2 mb-5">
-    @for (int i = 0; i < Model.Items.Count; i++)
-    {
-        var cliente = Model.Items[i];
+@if (Model.TotalItems <= 0)
+{
+    <div class="d-flex justify-content-center align-items-center flex-column">
+        <img src="~/images/add.png" />
+        <h3>Ops, nenhum cliente por enquanto</h3>
+        <p>Vamos cadastrar o primeiro cliente?</p>
+        <a class="btn btn-primary" href="@Url.Action("Cadastrar", "Cliente", new { id = 0})">
+            <i class="fas fa-plus"></i>
+            Adicionar Cliente
+        </a>
+    </div>
+}
+else
+{
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-2 mb-5">
+        @for (int i = 0; i < Model.Items.Count; i++)
+        {
+            var cliente = Model.Items[i];
 
-        <div class="col">
-            <div class="card shadow-sm">
-                <a class="btn-deletar" href="@Url.Action("Excluir", "Cliente", new { id = cliente.Id})">
-                    <i class="fas fa-trash"></i>
-                </a>
-                <div class="d-flex align-items-center justify-content-center pt-5 pb-3 container-foto" width="100%">
-                    <img class="logotipo" src="@(string.IsNullOrWhiteSpace(cliente.Logotipo) ? "/images/logo.png" : cliente.Logotipo )" />
-                </div>
+            <div class="col">
+                <div class="card shadow-sm">
+                    <a class="btn-deletar" href="@Url.Action("Excluir", "Cliente", new { id = cliente.Id})">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                    <div class="d-flex align-items-center justify-content-center pt-5 pb-3 container-foto" width="100%">
+                        <img class="logotipo" src="@(string.IsNullOrWhiteSpace(cliente.Logotipo) ? "/images/logo.png" : cliente.Logotipo )" />
+                    </div>
 
-                <div class="card-body">
-                    <p class="label-nome">@cliente.Nome</p>
-                    <p class="label-email">@cliente.Email</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <a class="btn btn-sm btn-outline-primary" href="@Url.Action("Enderecos", "ClienteEndereco", new { id = cliente.Id})">
-                            <i class="fas fa-map-marker-alt"></i>
-                            Endereços
-                        </a>
-                        <div class="btn-group">
-                            <a class="btn btn-sm btn-outline-secondary" href="@Url.Action("Editar", "Cliente", new { id = cliente.Id})">
-                                <i class="fas fa-edit"></i>
-                                Editar
+                    <div class="card-body">
+                        <p class="label-nome">@cliente.Nome</p>
+                        <p class="label-email">@cliente.Email</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a class="btn btn-sm btn-outline-primary" href="@Url.Action("Enderecos", "ClienteEndereco", new { id = cliente.Id})">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Endereços
                             </a>
+                            <div class="btn-group">
+                                <a class="btn btn-sm btn-outline-secondary" href="@Url.Action("Editar", "Cliente", new { id = cliente.Id})">
+                                    <i class="fas fa-edit"></i>
+                                    Editar
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    }
-</div>
-<div class="d-flex justify-content-between">
-    <label>
-        Página  @Model.PageNumber de @Model.TotalPages
-    </label>
-
-    <div>
-        @if (Model.HasPreviousPage)
-        {
-            <a class="btn btn-primary me-2" href="@Url.Action("Index", "Cliente", new { pagina = Model.PageNumber - 1, registros = ViewBag.RegistrosPorPagina ?? 10 })">
-                <i class="fas fa-arrow-left"></i>
-            </a>
-        }
-        else
-        {
-            <button disabled class="btn btn-secondary me-2">
-                <i class="fas fa-arrow-left"></i>
-            </button>
-        }
-        @if (Model.HasNextPage)
-        {
-            <a class="btn btn-primary" href="@Url.Action("Index", "Cliente", new { pagina = Model.PageNumber + 1, registros = ViewBag.RegistrosPorPagina ?? 10 })">
-                <i class="fas fa-arrow-right"></i>
-            </a>
-        }
-        else
-        {
-            <button disabled class="btn btn-secondary">
-                <i class="fas fa-arrow-right"></i>
-            </button>
         }
     </div>
-</div>
+    <div class="d-flex justify-content-between">
+        <label>
+            Página  @Model.PageNumber de @Model.TotalPages
+        </label>
+
+        <div>
+            @if (Model.HasPreviousPage)
+            {
+                <a class="btn btn-primary me-2" href="@Url.Action("Index", "Cliente", new { pagina = Model.PageNumber - 1, registros = ViewBag.RegistrosPorPagina ?? 10 })">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+            }
+            else
+            {
+                <button disabled class="btn btn-secondary me-2">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+            }
+            @if (Model.HasNextPage)
+            {
+                <a class="btn btn-primary" href="@Url.Action("Index", "Cliente", new { pagina = Model.PageNumber + 1, registros = ViewBag.RegistrosPorPagina ?? 10 })">
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            }
+            else
+            {
+                <button disabled class="btn btn-secondary">
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            }
+        </div>
+    </div>
+}
 <input type="hidden" value="@Model.TotalPages" />
 <input type="hidden" value="@Model.PageSize" />
 <input type="hidden" value="@Model.HasPreviousPage" />

@@ -1,4 +1,5 @@
 ﻿using GerenciadorDeClientes.Infra.Data.Context;
+using GerenciadorDeClientes.Infra.Data.Migrations;
 using GerenciadorDeClientes.WebApi.Domain.Core.Interfaces.Repositories;
 using GerenciadorDeClientes.WebApi.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,11 @@ namespace GerenciadorDeClientes.Infra.Data.Repositories
             Update(clienteModificado);
             await SaveChangesAsync();
             return clienteModificado;
+        }
+
+        public async Task ExcluirAsync(long id)
+        {
+            await _context.Database.ExecuteSqlRawAsync("EXEC sp_delete_endereco @p0", id);
         }
 
         public async Task<Endereco?> InserirAsync(Endereco novoCliente)

@@ -24,10 +24,13 @@ namespace GerenciadorDeClientes.WebApi.Domain.Services
 
         public async Task ExcluirAsync(long id)
         {
+            /*
             var entity = await ListarAsync(id);
             if (entity != null)
                 _enderecoClienteRepository.Delete(entity);
             await _enderecoClienteRepository.SaveChangesAsync();
+            */
+            await _enderecoClienteRepository.ExcluirAsync(id);
         }
 
         public async Task<Endereco> ListarAsync(long id)

@@ -12,5 +12,6 @@ namespace GerenciadorDeClientes.WebApi.Domain.Core.Interfaces.Repositories
         Task<bool> ValidarDuplicidadeDeEmailAsync(string email, long id);
         Task<Endereco?> InserirAsync(Endereco novoCliente);
         Task<Endereco?> AtualizarAsync(Endereco cliente);
+        Task ExcluirAsync(long id);
     }
 }
