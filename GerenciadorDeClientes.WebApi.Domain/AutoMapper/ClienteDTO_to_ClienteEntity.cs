@@ -14,7 +14,9 @@ namespace GerenciadorDeClientes.WebApi.Domain.AutoMapper
         public ClienteDTO_to_ClienteEntity()
         {
             CreateMap<ClienteDTO, Cliente>()
-                .ForMember(dest => dest.Logotipo, opt => opt.MapFrom(src => string.IsNullOrEmpty(src.LogotipoModificado) ? src.Logotipo : src.LogotipoModificado));
+                .ForMember(dest => dest.Logotipo, opt => opt.MapFrom(src => string.IsNullOrEmpty(src.LogotipoModificado) ? src.Logotipo : src.LogotipoModificado))
+                
+                ;
         }
     }
 }

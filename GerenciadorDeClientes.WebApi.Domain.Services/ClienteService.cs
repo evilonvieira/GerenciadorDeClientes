@@ -77,10 +77,22 @@ namespace GerenciadorDeClientes.WebApi.Domain.Services
             if (emailInvalido)
                 throw new Exception("E-mail ja cadastrado no sistema");
 
+            var entity = _mapper.Map<Cliente>(clienteDTO);
+            if (!string.IsNullOrEmpty(clienteDTO.LogotipoModificado))
+            {
+                var base64 = clienteDTO.LogotipoModificado?
+                    .Replace("data:image/jpeg;base64,", "")
+                    .Replace("data:image/png;base64,", "")
+                    .Replace("data:image/jpg;base64,", "")
+                    ;
+                if (!string.IsNullOrWhiteSpace(base64))
+                    entity.Logo = Convert.FromBase64String(base64);
+            }
+
             if (clienteDTO.Id == 0)
-                return await _clienteRepository.InserirAsync(_mapper.Map<Cliente>(clienteDTO));
+                return await _clienteRepository.InserirAsync(entity);
             else
-                return await _clienteRepository.AtualizarAsync(_mapper.Map<Cliente>(clienteDTO));
+                return await _clienteRepository.AtualizarAsync(entity);
         }
 
         public async Task<bool> ValidarDuplicidadeDeEmailAsync(string email, long id)

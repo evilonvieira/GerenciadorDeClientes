@@ -18,8 +18,9 @@ namespace GerenciadorDeClientes.Infra.Data.Mapping
             builder.Property(c => c.Nome).IsRequired().HasMaxLength(50);
             builder.Property(c => c.Email).IsRequired().HasMaxLength(100);
             builder.Property(c => c.Logotipo);
+            builder.Property(c => c.Logo).HasColumnType("VARBINARY(MAX)");
 
-            
+
             builder.HasMany(c => c.Enderecos)
             .WithOne(l => l.Cliente)
             .HasForeignKey(l => l.IdCliente)
