@@ -33,12 +33,6 @@ Construído em DDD para facilitar o entendimento, manutenção e escalabilidade 
 - **SqlServer 16 - Express**: [download](https://www.microsoft.com/pt-br/sql-server/sql-server-downloads)
 - **.NET 8.0**: [download](https://dotnet.microsoft.com/pt-br/download/dotnet/8.0)
 
-### Visual Studio
-
-Abra as propriedades da solução no visual studio e configure a opção “Multiple startup projects”, conforme abaixo:
-
-![image](docs/images/solution-properties.png)
-
 ## :floppy_disk: Migrations
 
 O projeto utiliza migration, portanto ao baixar o projeto configure a string de conexão no arquivo app.settings de acordo com a instalação do seu SqlServer.
@@ -76,6 +70,14 @@ Update-Database
 ```
 
 ## :computer: Executando o Projeto
+
+### Visual Studio
+
+Abra as propriedades da solução no visual studio e configure a opção “Multiple startup projects”, conforme abaixo:
+
+![image](docs/images/solution-properties.png)
+
+### Sistema
 
 Neste momento as migrações já criaram o usuário "Administrador", utilize as credenciais abaixo para acessar o sistema.
 
